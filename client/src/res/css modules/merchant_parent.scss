@@ -1,0 +1,302 @@
+@import "./index.scss";
+$boxshadow: 2px 2px 2px 2px
+  rgba(
+    $color: #000000,
+    $alpha: 0.2,
+  );
+
+.header {
+  display: flex;
+
+  background-color: $color;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 0.5em;
+  &.opt {
+    position: sticky;
+    transition: all 0.3s linear;
+    top: 0;
+    justify-content: center;
+    background-color: #ffffff;
+    box-shadow: $boxshadow;
+    form {
+      width: 0;
+      padding: 0;
+      opacity: 0;
+      margin: 0;
+      position: relative !important;
+      right: 1em;
+
+      align-self: flex-end;
+    }
+    input {
+      border-radius: 5px;
+      border: solid 1px silver;
+      transition: all 0.3s linear;
+      width: 100%;
+      font-size: large;
+      padding: 0.2em 7% 0.2em 0.2em;
+      align-self: stretch;
+      margin: 0 !important;
+      //padding: 0 !important;
+      opacity: 1;
+    }
+    .arrow {
+      position: absolute;
+      left: 0.5em;
+    }
+    p {
+      color: #000000;
+      margin: 0;
+      font-size: large;
+    }
+    img {
+      width: 5%;
+      margin-right: 5px;
+      position: absolute;
+      right: 3em;
+      &.add {
+        right: 10px;
+      }
+      &.shop-logo {
+        position: static;
+        margin: 0;
+        width: 7%;
+      }
+      &.in-form {
+        position: absolute;
+        background-color: silver;
+        height: 100%;
+        width: 9%;
+        left: auto;
+        bottom: auto;
+        right: 0;
+        padding: 0.1em;
+        top: 0;
+        margin: 0;
+        border-radius: 5px 0 0 5px;
+      }
+    }
+  }
+  .hamburger-inner {
+    &::after,
+    &:before,
+    & {
+      background-color: #ffffff;
+    }
+  }
+  .is-active {
+    .hamburger-inner {
+      &::after,
+      &:before,
+      & {
+        background-color: #ffffff !important;
+      }
+    }
+  }
+  p {
+    font-size: x-large;
+    font-weight: 600;
+    color: #ffffff;
+    padding-left: 0.3em;
+  }
+}
+.merc_profile_con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0;
+  padding: 0 1em;
+  .profile_pic {
+    width: 10em;
+    height: 10em;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    border: #0000001a solid 10px;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(
+      135deg,
+      rgba($color: #000000, $alpha: 0.22),
+      rgba($color: #ffffff, $alpha: 0.25)
+    );
+    align-items: center;
+    flex-direction: column;
+    border-radius: 50%;
+    box-shadow: 4px 4px 16px 0 rgba($color: #000000, $alpha: 0.25),
+      -2px -2px 12px 0 rgba($color: #ffffff, $alpha: 0.3);
+  }
+  p {
+    text-align: center;
+  }
+}
+.merchant-name-con {
+  margin: 3em 0 1em 0;
+  .merchant_name {
+    font-weight: 600;
+    font-size: medium;
+  }
+  width: 100%;
+  font-size: small;
+  text-align: center;
+}
+.items,
+.followers {
+  img {
+    color: #ffffff;
+    width: 2em;
+  }
+}
+.merchant-options-con {
+  background-color: $color;
+  display: grid;
+  // background-color: #000000;
+  grid-template-columns: repeat(2, 40%);
+  grid-template-rows: repeat(2, 45%);
+  padding: 1em;
+  justify-content: space-around;
+  align-content: space-around;
+  .merchant-option-card {
+    box-shadow: $boxshadow;
+    background-color: $cardBackgroundColor;
+    padding: 0.5em;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    img {
+      width: 90%;
+      height: 80%;
+      margin-bottom: 0.2em;
+    }
+  }
+  p {
+    background: #000;
+    color: #ffffff;
+    border-radius: 5px;
+    align-self: stretch;
+    font-weight: 600;
+    padding: 0.2em 0;
+  }
+}
+.shop-card-con {
+  box-shadow: $boxshadow;
+  display: grid;
+  position: relative;
+  border-radius: 10px;
+  grid-template-columns: repeat(2, 50%);
+  padding: 0.5em;
+  grid-auto-columns: 100%;
+  margin: 0.5em;
+  .img-con {
+    img {
+      width: 90%;
+    }
+  }
+  .shop-item-details-con {
+    p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: small;
+    }
+    .brand-name {
+      font-weight: 600;
+      font-size: large;
+    }
+    .price {
+      text-align: right;
+      font-size: x-large;
+      color: green;
+    }
+  }
+  .shop-actions-con {
+    margin-top: 0.5em;
+    display: grid;
+    grid-template-columns: 20% 20% 60%;
+    align-content: space-evenly;
+    width: 200%;
+    .total-sales {
+      text-align: right;
+      font-size: small;
+    }
+    .eye-con {
+      color: skyblue;
+      display: grid;
+      grid-template-columns: repeat(2, 50%);
+    }
+  }
+  .shelved {
+    padding: 0.2em 0.3em;
+    position: absolute;
+    border: inset 1px #ffffff;
+    font-size: small;
+    background-color: $color;
+    color: #ffffff;
+    top: 0;
+    left: 0;
+    font-weight: bold;
+    border-radius: 0 10px 10px 0;
+    width: max-content;
+  }
+}
+.input-con {
+  display: grid;
+  grid-auto-flow: dense;
+  margin-bottom: 1em;
+  label {
+    font-size: small;
+    margin-bottom: 0.5em;
+  }
+  input {
+    border: solid 1px silver;
+    border-radius: 0.2em;
+    font-size: large;
+    padding: 0 0.2em;
+    height: 2em;
+    &[type="submit"] {
+      background-color: goldenrod;
+      color: #ffffff;
+      font-weight: bold;
+    }
+    &[type="file"] {
+      width: 100%;
+    }
+  }
+
+  select::before {
+    color: "Aryuvida";
+    height: 3em;
+    background: #000;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+  }
+}
+.add-form {
+  padding: 16px;
+}
+.date-box {
+  display: grid;
+  grid-template-columns: repeat(2, 40%);
+  justify-content: space-between;
+}
+.preview {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  border-radius: 50%;
+  background-color: $color;
+  height: 4em;
+  width: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid white 1px;
+  svg {
+    color: #ffffff;
+  }
+}

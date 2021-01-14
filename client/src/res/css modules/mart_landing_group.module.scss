@@ -1,0 +1,70 @@
+@font-face {
+  font-family: Roboto;
+  src: url("../fonts/Roboto/Roboto-Medium.ttf");
+}
+$color: #075c5f;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: Raleway, sans-serif !important;
+}
+.group_parent {
+  margin: 1em 0;
+}
+.group_con {
+  height: 33.3%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.group_card {
+  width: 45%;
+  height: 12em;
+  margin: 0.2em;
+  padding: 0.5em 0.5em;
+  border: solid 1px #bbbaba;
+  border-radius: 5px;
+}
+.more {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  color: $color;
+}
+.title_parent {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 2em;
+}
+.ph {
+  height: 80%;
+  width: 90%;
+}
+.group_title {
+  font-size: large;
+  font-weight: bold;
+}
+.drug_tag {
+  display: flex;
+  justify-content: space-between;
+  color: inherit;
+  font-size: small;
+}
+.company_tag {
+  font-size: small;
+}
+.fa_caret_right,
+.fa_caret_right::before,
+.fa_caret_right::after {
+  margin-left: 0.3em;
+  color: $color !important;
+}

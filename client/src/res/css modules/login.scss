@@ -1,0 +1,298 @@
+@font-face {
+  font-family: Roboto;
+  src: url("../fonts/Roboto/Roboto-Medium.ttf");
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto !important;
+}
+@mixin login {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #3a3838;
+}
+input[type="submit"] {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  border-radius: 5px;
+}
+$label_color: #fbfcc5;
+@mixin flex-row {
+  display: flex;
+  justify-content: space-around;
+  overflow: visible;
+  align-items: center;
+}
+.blue_background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  min-height: 100%;
+  z-index: -1;
+  min-width: 100%;
+  right: 0;
+}
+.parent {
+  padding: 1em;
+  color: #041368 !important;
+}
+.cart_logo {
+  height: 2em;
+  width: 2em;
+}
+
+input:focus {
+  outline: none !important;
+}
+
+.section_one {
+  position: sticky;
+  bottom: 0;
+  height: 33.3%;
+  min-width: 100%;
+  padding: 0.2em 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.login_header {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+.line,
+.line2 {
+  height: 1px;
+  position: absolute;
+  width: 20%;
+  top: 50%;
+  background-color: rgb(255, 255, 255);
+  left: 1em;
+}
+
+.line2 {
+  right: 1em !important;
+  left: auto;
+}
+
+.section_two {
+  margin-top: 1em;
+}
+.login_text {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffffff !important;
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    :visited {
+      color: red !important;
+    }
+  }
+}
+.input_container {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 1em 0;
+  margin-bottom: 1em;
+}
+
+.input {
+  width: 100%;
+  font-size: larger;
+  border: none;
+  padding: 0;
+  transition: all linear 0.3s;
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(97, 102, 102, 0.123);
+}
+
+.label {
+  margin-bottom: 5px;
+  transition: all linear 0.3s;
+  transform: translateY(1.4em);
+  z-index: -1;
+  font-size: medium;
+}
+
+label {
+  color: rgb(101, 101, 104);
+}
+.form {
+  margin-top: 1em;
+  padding: 0;
+}
+
+.input:focus + .label,
+.input:valid + .label {
+  transform: translateY(0);
+  font-size: small;
+  color: $label_color;
+}
+.input:focus {
+  border-bottom-color: $label_color;
+}
+
+.login_btn {
+  width: 100%;
+  color: #ffffff;
+  height: max-content;
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.5s linear;
+  font-size: medium;
+  background-color: #0c77a879;
+}
+
+.login_btn:hover {
+  filter: brightness(120%);
+  box-shadow: -1px -1px 5px 1px inset rgba(99, 98, 98, 0.514);
+}
+.slide__in__right {
+  animation: slide_in_right 0.5s linear forwards;
+}
+
+.slide__out__right {
+  animation: slide_out_right 0.5s linear forwards;
+}
+
+.slide__out__left {
+  animation: slide_out_left 0.5s linear forwards;
+}
+
+.slide__in__left {
+  animation: slide_in_left 0.5s linear forwards;
+}
+
+.form_con_parent {
+  display: flex;
+  overflow-x: hidden;
+}
+
+.form_con {
+  min-width: 100%;
+}
+
+@keyframes slide_out_left {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide_in_left {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide_out_right {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide_in_right {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.sex_con {
+  @include flex-row;
+}
+.input_sex_con {
+  @include flex-row();
+}
+input[type="checkbox"] {
+  margin-right: 0.7em;
+}
+.move {
+  animation: move 1s ease-in-out forwards;
+}
+@keyframes move {
+  to {
+    transform: scale(1.2, 1.2);
+  }
+}
+.move_second {
+  animation: move_second 2s ease-in-out forwards;
+}
+@keyframes move_second {
+  to {
+    transform: scale(1.2, 1.2);
+  }
+}
+.unmove {
+  animation: unmove 1s ease-in-out forwards;
+}
+.unmove__second {
+  animation: unmove_second 2s ease-in-out forwards;
+}
+@keyframes unmove {
+  from {
+    transform: scale(1.2, 1.2);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+@keyframes unmove_second {
+  from {
+    transform: scale(1.2, 1.2);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+.forgot_password {
+  @include flex-row();
+  justify-content: flex-end;
+  margin-top: 2em;
+  a {
+    font-size: small;
+    color: #d5d80e;
+    text-decoration: none;
+  }
+}
+button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn_icon {
+  height: 3em;
+  position: absolute;
+  right: 0.5em;
+  width: 3em;
+  margin-left: auto;
+}
+button > p {
+  color: #ffffff;
+  padding: 0.5em 1em;
+}

@@ -1,0 +1,35 @@
+@import "/index.scss";
+.alert-parent {
+  position: fixed;
+  z-index: 1000000;
+  transition: all ease-in-out 1s;
+  // background-color: #ffffff;
+  width: 100%;
+  top: -100%;
+  text-align: center;
+  padding: 1em 0.5em;
+  background: white;
+  border-bottom: solid 1px $color;
+  //background-size: 70%;
+  //background-position: -150% 0;
+  //background-repeat: no-repeat;
+  //background-image: linear-gradient(45deg, white, lightgrey 40%, white 60%);
+  svg {
+    color: $color;
+  }
+  // animation: flash 5s ease-in-out alternate 2;
+}
+// @keyframes flash {
+//   100% {
+//     //background-size: 50%;
+//     //font-size: x-large;
+//     // background-position: 300% 10%;
+//     top: 0;
+//   }
+// }
+.down {
+  top: 0;
+}
+.up {
+  top: -100%;
+}

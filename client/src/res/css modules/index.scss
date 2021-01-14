@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+$starColor: gold;
+$heartColor: red;
+$color: #075c5f;
+$backgroundcolor: rgb(241, 239, 239);
+$cardBackgroundColor: #ffffff;
+@font-face {
+  font-family: Roboto-Medium;
+  src: url("../fonts/Roboto/Roboto-Medium.ttf");
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Raleway !important;
+}
+::-webkit-scrollbar {
+  width: 0.1px !important;
+  height: 0.1px !important;
+}
+::-webkit-scrollbar-thumb {
+  background: #0fd7e25d !important;
+}
+html,
+body,
+.App,
+#root {
+  height: 100%;
+  width: 100%;
+
+  color: rgb(41, 40, 40) !important; //#041368 !important;
+  .star {
+    color: $starColor !important;
+  }
+  .heart {
+    color: $heartColor !important;
+  }
+}

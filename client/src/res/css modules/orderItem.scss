@@ -1,0 +1,45 @@
+$shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.034),
+  -1px -1px 1px 1px rgba(0, 0, 0, 0.034);
+.orderItemCard {
+  display: flex;
+  box-shadow: $shadow;
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin-bottom: 1em;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Roboto !important;
+}
+.card-info {
+  width: 50%;
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: small;
+    margin-bottom: 0.2em;
+    &:first-of-type {
+      font-size: medium;
+    }
+  }
+  .order-status {
+    background-color: green;
+    border-radius: 5px;
+    padding: 0.2em;
+    color: white;
+    font-size: smaller;
+  }
+  .price {
+    text-align: right;
+    font-size: larger;
+    color: green;
+  }
+}
+.card-img {
+  margin-right: 1em;
+  width: 50%;
+  img {
+    width: 100%;
+  }
+}

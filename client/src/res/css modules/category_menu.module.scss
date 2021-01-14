@@ -1,0 +1,16 @@
+.category_menu {
+  position: fixed;
+
+  top: 200%;
+  bottom: 1em;
+  transition: all linear 0.3s;
+  left: 0;
+  right: 0;
+  background-color: #ffffff00;
+
+  width: 100%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
