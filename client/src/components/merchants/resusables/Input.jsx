@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Input({ type, name, label, id, value, placeholder }) {
+function Input({ type, name, label, id, value, placeholder, info }) {
   const [inputValue, setInputValue] = useState(value);
   const handleInputValue = (e) => setInputValue(e.target.value);
   return (
@@ -14,6 +14,7 @@ function Input({ type, name, label, id, value, placeholder }) {
         id={id}
         placeholder={placeholder}
       />
+      <p className="info">{info}</p>
     </div>
   );
 }

@@ -3,25 +3,23 @@ import { createSlice } from "@reduxjs/toolkit";
 const slice = createSlice({
   name: "alert",
   initialState: {
-    brand: "",
-    generic: "",
-    strength: "",
-    formulation: "",
-    drug_class: "",
+    name: "",
     description: "",
-    expiry_date: "",
-    manufacture_date: "",
-    packsize: "",
     quantity: "",
-    nafdac: "",
     price: "",
     imageForm: false,
-    company: "",
+    manufacturer: "",
     images: [],
   },
   reducers: {
     view: (state, { payload }) => ({ ...payload }),
+    images: (state, { payload }) => {
+      console.log(state.images);
+      state.images = [...payload.images];
+      console.log(state.images);
+      return state;
+    },
   },
 });
-export const { view } = slice.actions;
+export const { view, images } = slice.actions;
 export default slice.reducer;

@@ -48,7 +48,7 @@ function Checkout(props) {
   return (
     <div className="checkout_con main">
       <div className="checkout_heading">
-        <p>DrugMart</p>
+        <p>Jumga</p>
       </div>
       <div className="checkout_status_con">
         <p>Shipment </p>

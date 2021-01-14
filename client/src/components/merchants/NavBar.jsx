@@ -8,7 +8,7 @@ function NavBar(props) {
   return (
     <div className="header">
       <div className="logo_con">
-        <p>DrugMart</p>
+        <p>Jumga</p>
       </div>
       <div
         onClick={handleShowMenu}

@@ -9,38 +9,24 @@ import caret from "../../../res/images/down-arrow (1).svg";
 import OptHeaders from "./OptHeaders";
 function Preview(props) {
   const {
-    brand,
-    generic,
+    name,
     strength,
-    formulation,
-    drug_class,
     description,
-    expiry_date,
-    manufacture_date,
-    packsize,
-
-    nafdac,
     price,
-    company,
+    manufacturer,
     images,
   } = useSelector((state) => state.entities.preview);
   let [isDesc, setIsDesc] = useState(false);
   let [isDetails, setIsDetails] = useState(true);
   let [isPolicy, setIsPolicy] = useState(false);
   let [desHeight, setDesHeight] = useState(0);
-  let [detHeight, setDetHeight] = useState(0);
   let [polHeight, setPolHeight] = useState(0);
   const desChild = useRef(null); //description box for slide dow
   const desCaret = useRef(null); //for caret transition
-  const detChild = useRef(null); //for details transition
-  const detCaret = useRef(null); //for details caret transition
   const polChild = useRef(null); //for details caret transition
   const polCaret = useRef(null);
 
-  useEffect(() => {
-    setDetHeight(detChild.current.offsetHeight);
-  }, []);
-  const handleAddToCart = (form) => {
+  const handleAddToCart = () => {
     // form.preventDefault();
     //  form.target.blur();
     //cartDispatch(increaseQuantity({ id: item.id, quantity: cartQuantity }));
@@ -48,9 +34,8 @@ function Preview(props) {
   };
   const handleReveal = async (e) => {
     await setDesHeight(desChild.current.offsetHeight);
-    await setDetHeight(detChild.current.offsetHeight);
+
     await setPolHeight(polChild.current.offsetHeight);
-    console.log(desHeight, detHeight);
     if (e === "description") {
       if (!isDesc) {
         await setIsDesc(true);
@@ -106,7 +91,7 @@ function Preview(props) {
       <div className="description_title_parent">
         <div className="description_title_con">
           <p className="description_title">
-            {brand} {strength}
+            {name} {strength}
           </p>
           <i style={{ color: "red" }} className="fa fa-heart"></i>
         </div>
@@ -175,70 +160,7 @@ function Preview(props) {
           </p>
         </div>
       </div>
-      <div className="description_child_con">
-        <div
-          onClick={() => handleReveal("details")}
-          className="description_child"
-        >
-          <p>Details</p>
-          <img
-            style={{
-              transform: isDetails ? "rotateZ(-180deg)" : "rotate(0deg)",
-            }}
-            ref={detCaret}
-            src={caret}
-            alt="caret"
-          />
-        </div>
-        <div
-          style={{
-            height: isDetails ? detHeight + "px" : "0px",
-            opacity: isDetails ? 1 : 0,
-          }}
-          className="description_text_con"
-        >
-          <table ref={detChild}>
-            <tr>
-              <td>Brand</td>
-              <td>{brand}</td>
-            </tr>
-            <tr>
-              <td>Strength</td>
-              <td>{strength}</td>
-            </tr>
-            <tr>
-              <td>Generic</td>
-              <td style={{ fontSize: "small" }}>
-                {generic} {strength}
-              </td>
-            </tr>
-            <tr>
-              <td>Formulation</td>
-              <td>{formulation}</td>
-            </tr>
-            <tr>
-              <td>Manufacturer</td>
-              <td> {company}</td>
-            </tr>
-            <tr>
-              <td>MFD</td>
-              <td>{manufacture_date}</td>
-            </tr>
-            <tr>
-              <td style={{ color: "red" }}>EXD</td>
-              <td>{expiry_date}</td>
-            </tr>
-            <tr>
-              <td>Nafdac No#</td>
-              <td>{nafdac}</td>
-            </tr>
-            <tr>
-              <td>Pack Size</td>
-              <td>{packsize}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
+
       <div className="description_child_con">
         <div
           onClick={() => handleReveal("policy")}

@@ -15,7 +15,7 @@ function UserOptions(props) {
     <div className="account_parent">
       <div className="account_logo">
         <Link to="/">
-          <p className="neomorph">DrugMart</p>
+          <p className="neomorph">Jumga</p>
         </Link>
       </div>
       <div className="account_header">

@@ -879,7 +879,7 @@ const Mart_Landing = (props) => {
         </div>
         <div className={styles.header}>
           <Link to="/">
-            <p>DrugMart</p>
+            <p>Jumga</p>
           </Link>
           <div onClick={handleUserOptions} className={styles.user}>
             <i className="fa fa-user fa-2x"></i>
