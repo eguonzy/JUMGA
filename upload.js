@@ -3,9 +3,16 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const app = express();
+
 app.use("/images", express.static(path.join(__dirname, "images/")));
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    req.customUrl = req.customUrl
+      ? [
+          ...req.customUrl,
+          { url: "/images/" + file.originalname, name: file.originalname },
+        ]
+      : [];
     fs.mkdir("images/" + file.originalname, { recursive: true }, (err) => {
       if (err) console.log(err);
     });

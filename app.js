@@ -1,11 +1,11 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-
+const dotenv = require("dotenv").config();
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var indexRouter = require("./routes/index");
-var merchantRouter = require("./routes/merchantRouter");
+var merchantRouter = require("./routes/userRouter");
 
 const bodyParser = require("body-parser");
 var app = express();
@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 app.use(indexRouter);
 app.use(merchantRouter);
-
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", function (req, res) {

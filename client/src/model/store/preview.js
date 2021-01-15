@@ -15,11 +15,17 @@ const slice = createSlice({
     view: (state, { payload }) => ({ ...payload }),
     images: (state, { payload }) => {
       console.log(state.images);
-      state.images = [...payload.images];
+      state.images = [...state.images, ...payload.images];
       console.log(state.images);
       return state;
     },
+    deleteImage: (state, { payload }) => {
+      console.log("this");
+      state.images = state.images.filter(
+        (image) => image.id !== payload.image.id
+      );
+    },
   },
 });
-export const { view, images } = slice.actions;
+export const { view, images, deleteImage } = slice.actions;
 export default slice.reducer;

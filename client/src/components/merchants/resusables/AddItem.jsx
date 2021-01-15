@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import OptHeaders from "./OptHeaders";
 import AddForm from "./AddForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { down, up } from "../../../model/store/alert";
 //import io from "socket.io-client";
 //const socket = io();
@@ -9,22 +9,19 @@ function AddItem(props) {
   let dispatch = useDispatch();
   //const [] = useState(0);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    let form = new FormData(event.target);
-    let images = [];
-    for (const iterator of event.target.images.files) {
-      images.push(iterator);
-    }
-    // dispatch(down());
-    // const request = await fetch("/images");
-    //const res = await request.blob();
-    const myFiles = new FileList(...images);
-    console.dir(myFiles);
-    console.dir();
+  const state = useSelector((state) => state.entities.preview.images);
 
-    // console.log(form.images.files);
-    // form.images.files.length < 3 && alert("Amount of images must be 3");
+  const handleSubmit = async (event) => {
+    "use strict";
+    event.preventDefault();
+    event.persist();
+    let form = new FormData(event.target);
+    form.append("images", state);
+    let images = [];
+    dispatch(down());
+    const request = await fetch("/add_image", { method: "POST", body: form });
+    const res = await request.blob();
+    //state.length < 3 && alert("Amount of images must be 3");
     setTimeout(() => {
       dispatch(up());
     }, 2000);
