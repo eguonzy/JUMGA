@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
-
+$boxshadow: 2px 2px 2px 2px
+  rgba(
+    $color: #000000,
+    $alpha: 0.2,
+  );
 $starColor: gold;
 $heartColor: red;
 $color: #075c5f;

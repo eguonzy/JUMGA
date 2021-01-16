@@ -1,3 +1,4 @@
 import { combineReducers } from "redux";
 import entities from "./entities";
-export default combineReducers({ entities });
+import auth from "./auth";
+export default combineReducers({ entities, auth });

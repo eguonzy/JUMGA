@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { authorizeUser } from "../../model/store/userAuth";
 import "../../res/css modules/login.scss";
+import LoginInput from "../reusables/LoginInput";
+import PasswordInput from "../reusables/PasswordInput";
 const SignUp = (props) => {
   const [isMember, setIsMember] = React.useState(false);
+  const [position, setPosition] = React.useState("");
+  const [data, setData] = React.useState([]);
+  const getBanks = async ({ target }) => {
+    try {
+      const req = await fetch(
+        "https://api.flutterwave.com/v3/banks/" + target.value,
+        {
+          headers: {
+            Authorization: "Bearer FLWSECK-9a46a0c449c7b77d53e4ac511f9d9709-X",
+          },
+        }
+      );
+      const res = await req.json();
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const dispatch = useDispatch();
   const { onLoad } = props;
   React.useEffect(() => {
     setIsMember(true);
@@ -11,79 +34,101 @@ const SignUp = (props) => {
       onLoad("");
     };
   }, [onLoad]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    let form = new FormData(event.target);
+    console.log(event.target.email);
+    form.append(
+      "fullname",
+      event.target.firstname.value + " " + event.target.lastname.value
+    );
+    try {
+      console.log(form);
+      const request = await fetch("/user", {
+        body: form,
+        method: "POST",
+      });
+      const response = await request.json();
+      if (request.status === 200) {
+        dispatch(
+          authorizeUser({
+            user: response.user,
+            auth: response.blab,
+            token: response.token,
+          })
+        );
+        response.user.position === "merchant" &&
+          props.history.push("/merchant/home");
+        response.user.position === "consumer" && props.history.push("/");
+      }
+    } catch (error) {
+      alert("oops something went wrong");
+    }
+  };
+
+  const handlePosition = (e) => {
+    setPosition(e.target.value);
+    console.log(e.target.value);
+  };
+
   return (
     <div
       className={
         "form_con " + (isMember ? "slide__in__right" : "slide__out__right")
       }
     >
-      <form className="form">
-        <div className="input_container">
-          <input type="text" name="first_name" required className="input" />
-          <label className="label">Firstname</label>
+      <form onSubmit={handleSubmit} className="form">
+        <div className="input_sex_con">
+          <label htmlFor="type">Position</label>
+          <select onChange={handlePosition} value={position} name="position">
+            <option value="consumer">Consumer</option>
+            <option value="merchant">Merchant</option>
+          </select>
+          {position === "merchant" && (
+            <p className="info">A one time charge of $50 is required</p>
+          )}
         </div>
-        <div className="input_container">
-          <input className="input" name="surname" type="text" required />
-          <label className="label">Surname</label>
-        </div>
+
+        <LoginInput label="Firstname" name="firstname" />
+        <LoginInput label="Lastname" name="lastname" />
+        {position === "merchant" && (
+          <>
+            <LoginInput label="Buisness Name" name="buisness_name" />
+            <LoginInput
+              label="Bank Name"
+              isBank={true}
+              data={data}
+              name="bank"
+            />
+            <select onChange={getBanks}>
+              <option value="GH">Ghana</option>
+              <option value="KE">Kenya</option>
+              <option value="NG">Nigeria</option>
+              <option value="UK">United Kingdom</option>
+            </select>
+            <LoginInput label="Account Number" name="account_number" />
+            <LoginInput label="Buisness Address" name="address" />
+          </>
+        )}
         <div className="input_container">
           <input className="input" name="date_of_birth" type="date" required />
           <label>Date Of Birth</label>
         </div>
         <div className="input_sex_con">
-          <div className="sex_con">
-            {" "}
-            <input
-              className="chec"
-              name="male"
-              value="male"
-              type="checkbox"
-              required
-            />
-            <label>Male</label>
-          </div>
-          <div className="sex_con">
-            <input
-              className=""
-              name="female"
-              value="female"
-              type="checkbox"
-              required
-            />
-            <label>Female</label>
-          </div>
+          <label htmlFor="sex">Sex</label>
+          <select name="sex">
+            <option value="">Select sex</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="confused">Confused</option>
+          </select>
         </div>
-        <div className="input_container">
-          <input
-            className="input"
-            name="phone_number"
-            inputMode="tel"
-            required
-          />
-          <label className="label">Phone Number</label>
-        </div>
-        <div className="input_container">
-          <input
-            className="input"
-            name="email_address"
-            inputMode="email"
-            required
-          />
-          <label className="label">Email Address</label>
-        </div>
-        <div className="input_container">
-          <input className="input" name="company_name" type="text" required />
-          <label className="label">Company Name</label>
-        </div>
-        <div className="input_container">
-          <input
-            className="input"
-            name="company_location"
-            type="text"
-            required
-          />
-          <label className="label">Company Location</label>
-        </div>
+
+        <LoginInput label="Phone Number" inputMode="tel" name="phone_number" />
+        <LoginInput label="Email Address" inputMode="email" name="email" />
+        <PasswordInput />
+
         <input type="submit" className="login_btn" value="Sign Up" />
       </form>
     </div>

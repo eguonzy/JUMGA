@@ -1,12 +1,22 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const UserModel = new mongoose.Schema(
   {
     firstname: String,
     lastname: String,
+    fullname: String,
+    date_of_birth: String,
+    buisness_name: String,
+    account_number: Number,
+    sex: String,
     password: String,
     email: String,
     phone_number: String,
+    position: String,
+    payment_status: { type: Boolean, default: false },
     addresses: [],
+    address: String,
     tokens: [{ token: String }],
     shop_items: [
       {
@@ -15,6 +25,7 @@ const UserModel = new mongoose.Schema(
         quantity: Number,
         price: Number,
         quantity_sold: Number,
+
         description: String,
         images: [],
       },
@@ -56,6 +67,20 @@ const UserModel = new mongoose.Schema(
         total: String,
       },
     ],
+    cart: [
+      {
+        item: {
+          name: String,
+          manufacturer: String,
+          quantity: Number,
+          price: Number,
+          description: String,
+          images: [],
+        },
+        customer: mongoose.Types.ObjectId,
+        total: String,
+      },
+    ],
     rating_rating: [
       {
         customer: mongoose.Types.ObjectId,
@@ -69,11 +94,10 @@ const UserModel = new mongoose.Schema(
 
 UserModel.pre("save", async function (next) {
   if (this.isModified("password")) {
-    console.log(this);
     const salt = await bcrypt.genSalt(8);
     this.password = await bcrypt.hash(this.password, salt);
   }
-  l("after save");
+
   next();
 });
 
@@ -83,9 +107,8 @@ UserModel.statics.loginVal = async (email, password) => {
   if (!User) {
     throw new Error("invalid username or password");
   }
-  console.log(password);
   const match = await bcrypt.compare(password, User.password);
-  console.log(match, "match");
+
   if (!match) {
     throw new Error("invalid usernasme or password");
   }

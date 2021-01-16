@@ -12,9 +12,12 @@ import { account } from "../../model/store/account";
 import CartComponent from "./CartComponent";
 import Orders from "../account components/Orders";
 import { gsap } from "gsap";
+import UserOptionsCon from "../reusables/UserOptionsCon";
 const Mart_Landing = (props) => {
   const Dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.entities.loader);
+  const state = useSelector((state) => state);
+  const isLoading = state.entities.loader;
+  const { isAuthorized } = state.auth.userAuth;
   //Gsap.registerPlugin(ScrollTrigger);
   //controls the click response of category first items like "all"
   //arrg is used to determine if the click is to take user to the list screen if true or to open a category menu
@@ -848,7 +851,12 @@ const Mart_Landing = (props) => {
           props.history.push("/account/wishlist");
           Dispatch(account({ option: "WishList" }));
           break;
-
+        case 3:
+          props.history.push("/auth/login");
+          break;
+        case 4:
+          props.history.push("/auth/signup");
+          break;
         default:
           props.history.push("/account/settings");
           Dispatch(account({ option: "Settings" }));
@@ -884,33 +892,11 @@ const Mart_Landing = (props) => {
           <div onClick={handleUserOptions} className={styles.user}>
             <i className="fa fa-user fa-2x"></i>
           </div>
-          <div className={styles.profile}>
-            <p onClick={() => handleAccount(0)}>
-              <span>
-                <i className="fa fa-user"></i>
-                <span>My Account</span>
-              </span>{" "}
-              <i className="fa fa-angle-right"></i>
-            </p>
-            <p onClick={() => handleAccount(1)}>
-              <span>
-                <i className="fa fa-box-open"></i>
-                <span>My Orders</span>
-              </span>{" "}
-              <i className="fa fa-angle-right"></i>
-            </p>
-            <p onClick={() => handleAccount(2)}>
-              <span>
-                <i className="fa fa-heart heart"></i>
-                <span>My WishList</span>
-              </span>{" "}
-              <i className="fa fa-angle-right"></i>
-            </p>
-
-            <p className={styles.logout}>
-              <span>LOGOUT</span> <i className="fa fa-sign-out-alt"></i>
-            </p>
-          </div>
+          <UserOptionsCon
+            isAuthorized={isAuthorized}
+            styles={styles}
+            handleAccount={handleAccount}
+          />
           <div
             onClick={handleCloseUserOptions}
             className={styles.profile_con}

@@ -42,9 +42,9 @@ function AddImage({ value, images }) {
       </div>
       {!state.isEmpty && (
         <div className="add-image-con">
-          {state.map((image) => {
+          {state.map((image, index) => {
             return (
-              <div className="add-image-card">
+              <div key={image + index} className="add-image-card">
                 <img src={URL.createObjectURL(image)} alt="" />
                 <p onClick={() => handleDelete(image)}>
                   <i className="far fa-window-close fa-lg"></i>

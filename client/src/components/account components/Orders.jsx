@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { account } from "../../model/store/account";
 import "../../res/css modules/account.scss";
 import OrderItem from "../reusables/OrderItem";
 function Orders(props) {
   const dispatch = useDispatch();
   useEffect(() => dispatch(account({ option: "Orders" })));
-
+  const { orders } = useSelector((state) => state.auth.userAuth.user);
   const handleOrderCategory = (e, arrg) => {
     let list = document.getElementsByClassName("order");
     for (let index = 0; index < list.length; index++) {

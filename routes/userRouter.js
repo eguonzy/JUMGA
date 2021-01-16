@@ -6,19 +6,13 @@ var router = express.Router();
 const upit = require("../upload");
 
 router.post("/user", async (req, res) => {
+  console.log(req.body);
   try {
     let user = new User(req.body);
-
     await user.save();
-
-    let token = await User.tokenGen();
+    let token = await user.tokenGen();
     let blab = "locolastic";
-    console.log(user.position);
-    if (user.position === "ceo") {
-      return res.status(200).send({ user, token, blab });
-    }
-
-    return res.status(201).send({ user, token, blab });
+    return res.status(200).send({ user, token, blab });
   } catch (e) {
     console.log(e);
     res.status(400).send(e);
@@ -29,7 +23,7 @@ router.post("/user/login", async (req, res) => {
   try {
     const user = await User.loginVal(req.body.email, req.body.password);
 
-    const token = await User.tokenGen();
+    const token = await user.tokenGen();
     let blab = "locolastic";
 
     if (user.position === "ceo") {

@@ -1,3 +1,4 @@
+@import "./index.scss";
 @font-face {
   font-family: Roboto;
   src: url("../fonts/Roboto/Roboto-Medium.ttf");
@@ -102,6 +103,7 @@ input:focus {
   flex-direction: column-reverse;
   padding: 1em 0;
   margin-bottom: 1em;
+  position: relative;
 }
 
 .input {
@@ -125,6 +127,7 @@ input:focus {
 
 label {
   color: rgb(101, 101, 104);
+  mix-blend-mode: difference !important;
 }
 .form {
   margin-top: 1em;
@@ -226,7 +229,13 @@ label {
   @include flex-row;
 }
 .input_sex_con {
-  @include flex-row();
+  // @include flex-row();
+  display: grid;
+  margin-bottom: 2em;
+  label {
+    font-size: small;
+    margin-bottom: 5px;
+  }
 }
 input[type="checkbox"] {
   margin-right: 0.7em;
@@ -295,4 +304,48 @@ button {
 button > p {
   color: #ffffff;
   padding: 0.5em 1em;
+}
+.validate {
+  font-size: x-small;
+  color: red;
+  margin-top: 0.2em;
+  transition: all linear 0.5s;
+  opacity: 0;
+  p {
+    transition: all linear 0.5s;
+  }
+  svg {
+    color: green;
+  }
+  .icon {
+    opacity: 0;
+    transition: all linear 0.5s;
+  }
+}
+.info {
+  font-size: x-small;
+  margin-top: 0.3em;
+}
+.suggestions {
+  position: absolute;
+  top: calc(100% - 1em);
+  box-shadow: $boxshadow;
+  border-radius: 0 0 5px 5px;
+  max-height: 20em;
+  left: 0;
+  overflow-y: scroll;
+  padding: 0.5em;
+  right: 0;
+  background-color: white;
+  z-index: 1000;
+  p {
+    text-align: center;
+    margin-bottom: 1em;
+    color: #3a3838;
+    padding: 0.2em;
+    &:active {
+      background-color: #3a3838;
+      color: #ffffff;
+    }
+  }
 }

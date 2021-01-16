@@ -1,15 +1,14 @@
 import React from "react";
 
 import stand from "../../res/images/stand.svg";
-import followers from "../../res/images/followers.svg";
+import followers from "../../res/images/delivery-man.svg";
 
-function MerchantStatus(props) {
+function MerchantStatus({ onClick }) {
   return (
     <>
       <div className="merc_profile_con">
-        <div className="followers">
+        <div onClick={onClick} className="followers">
           <img src={followers} alt="followers" />
-          <p>0</p>
         </div>
         <div className="profile_pic">
           <p>Total Sales</p>

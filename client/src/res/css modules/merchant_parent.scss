@@ -1,9 +1,4 @@
 @import "./index.scss";
-$boxshadow: 2px 2px 2px 2px
-  rgba(
-    $color: #000000,
-    $alpha: 0.2,
-  );
 
 .header {
   display: flex;
@@ -149,6 +144,7 @@ $boxshadow: 2px 2px 2px 2px
   }
 }
 .merchant-options-con {
+  position: relative;
   background-color: $color;
   display: grid;
   // background-color: #000000;
@@ -180,6 +176,37 @@ $boxshadow: 2px 2px 2px 2px
     align-self: stretch;
     font-weight: 600;
     padding: 0.2em 0;
+  }
+  .not-paid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    p {
+      align-self: center;
+
+      color: #000000;
+      background: unset;
+      margin-bottom: 1em;
+    }
+    .paynow {
+      background-color: $color;
+      color: white;
+      padding: 1em;
+      border-radius: 5px;
+    }
+  }
+  .not-paid-card {
+    padding: 2em;
+    background-color: white;
+    text-align: center;
+    box-shadow: $boxshadow;
   }
 }
 .shop-card-con {
@@ -366,7 +393,7 @@ $boxshadow: 2px 2px 2px 2px
     }
     text-align: center;
     img {
-      width: 100%;
+      max-width: 100%;
       height: 7em;
     }
   }
