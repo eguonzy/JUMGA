@@ -5,7 +5,7 @@ var multer = require("multer");
 
 const upload = multer();
 
-const dotenv = require("dotenv").config();
+const dotenv = require("dotenv").config({ path: "./config/.env" });
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var indexRouter = require("./routes/index");
@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(upload.array());
 app.use(indexRouter);
 app.use(userRouter);
-console.log(process.env.NODE_ENV);
+console.log(process.env.NODE_ENV, "node");
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", function (req, res) {

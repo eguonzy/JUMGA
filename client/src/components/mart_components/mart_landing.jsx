@@ -941,7 +941,7 @@ const Mart_Landing = (props) => {
         </div>
       </div>
     );
-  }, [isLoading, props, Dispatch]);
+  }, [isLoading, props, Dispatch, isAuthorized]);
 };
 
 export default Mart_Landing;

@@ -11,6 +11,7 @@ const UserModel = new mongoose.Schema(
     account_number: Number,
     sex: String,
     password: String,
+    bank_code: String,
     email: String,
     phone_number: String,
     position: String,

@@ -1,6 +1,7 @@
 var express = require("express");
 const User = require("../model/userModel");
 const path = require("path");
+const axios = require("axios").default;
 var router = express.Router();
 
 const upit = require("../upload");
@@ -49,6 +50,20 @@ router.post("/add_image", upit.array("images"), async (req, res) => {
   }
 });
 
+router.get("/banklist/:country", async (req, res) => {
+  console.log(req.params);
+  try {
+    const request = await axios({
+      method: "GET",
+      url: "https://api.flutterwave.com/v3/banks/" + req.params.country,
+      headers: { Authorization: "Bearer " + process.env.secreteKey },
+    });
+    const response = await request.data;
+    res.send(response);
+  } catch (error) {
+    console.log(error);
+  }
+});
 router.post("/add_user", async (req, res) => {});
 
 module.exports = router;

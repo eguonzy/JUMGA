@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { authorizeUser } from "../../model/store/userAuth";
 import "../../res/css modules/login.scss";
@@ -7,21 +7,15 @@ import PasswordInput from "../reusables/PasswordInput";
 const SignUp = (props) => {
   const [isMember, setIsMember] = React.useState(false);
   const [position, setPosition] = React.useState("");
+  const [bankCode, setBankCode] = React.useState("");
   const [data, setData] = React.useState([]);
   const getBanks = async ({ target }) => {
     try {
-      const req = await fetch(
-        "https://api.flutterwave.com/v3/banks/" + target.value,
-        {
-          headers: {
-            Authorization: "Bearer FLWSECK-9a46a0c449c7b77d53e4ac511f9d9709-X",
-          },
-        }
-      );
+      const req = await fetch("/banklist/" + target.value);
       const res = await req.json();
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
   const dispatch = useDispatch();
@@ -43,6 +37,7 @@ const SignUp = (props) => {
       "fullname",
       event.target.firstname.value + " " + event.target.lastname.value
     );
+    form.append("bank_code", bankCode);
     try {
       console.log(form);
       const request = await fetch("/user", {
@@ -66,6 +61,8 @@ const SignUp = (props) => {
       alert("oops something went wrong");
     }
   };
+
+  const handleBankCode = (code) => setBankCode(code);
 
   const handlePosition = (e) => {
     setPosition(e.target.value);
@@ -94,19 +91,21 @@ const SignUp = (props) => {
         <LoginInput label="Lastname" name="lastname" />
         {position === "merchant" && (
           <>
+            {" "}
+            <select onChange={getBanks}>
+              <option value="">Select Country</option>
+              <option value="GH">Ghana</option>
+              <option value="KE">Kenya</option>
+              <option value="NG">Nigeria</option>
+            </select>
             <LoginInput label="Buisness Name" name="buisness_name" />
             <LoginInput
               label="Bank Name"
               isBank={true}
               data={data}
               name="bank"
+              handleBankCode={handleBankCode}
             />
-            <select onChange={getBanks}>
-              <option value="GH">Ghana</option>
-              <option value="KE">Kenya</option>
-              <option value="NG">Nigeria</option>
-              <option value="UK">United Kingdom</option>
-            </select>
             <LoginInput label="Account Number" name="account_number" />
             <LoginInput label="Buisness Address" name="address" />
           </>
