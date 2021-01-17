@@ -5,10 +5,19 @@ import review from "../../res/images/review.svg";
 import order from "../../res/images/order.svg";
 import sales from "../../res/images/sales.svg";
 import { useSelector } from "react-redux";
-
+import axios from "axios";
 function MerchantOptCon(props) {
-  const merchant = useSelector((state) => state.auth.userAuth.user);
+  const { user: merchant, auth } = useSelector((state) => state.auth.userAuth);
   console.log(merchant.payment_status);
+  const handlePayment = async () => {
+    const request = await axios({
+      url: "/shop_charge",
+      method: "GET",
+      headers: { Authorization: "Bearer " + localStorage.getItem(auth) },
+    });
+    const response = await request.data;
+    window.location.replace(response);
+  };
   return (
     <>
       <div className="merchant-options-con">
@@ -16,7 +25,9 @@ function MerchantOptCon(props) {
           <div className="not-paid">
             <div className="not-paid-card">
               <p>Open shop with $50</p>
-              <div className="paynow">Pay Now</div>
+              <div onClick={handlePayment} className="paynow">
+                Pay Now
+              </div>
             </div>
           </div>
         )}

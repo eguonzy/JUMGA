@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const user = require("../models/adminmodel");
+const User = require("../model/userModel");
 
 const auth = async (req, res, next) => {
   try {
@@ -7,14 +7,14 @@ const auth = async (req, res, next) => {
 
     const extract = jwt.verify(token, "lockandkey");
 
-    let admin = await Admin.findOne({
+    let user = await User.findOne({
       _id: extract._id,
       "tokens.token": token,
     });
-    if (!admin) {
+    if (!user) {
       throw new Error("");
     }
-    req.admin = await admin;
+    req.user = await user;
     req.token = await token;
     next();
   } catch (e) {

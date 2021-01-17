@@ -1,6 +1,7 @@
 var express = require("express");
 const User = require("../model/userModel");
 const path = require("path");
+const auth = require("../auth/auth");
 const axios = require("axios").default;
 var router = express.Router();
 
@@ -60,6 +61,43 @@ router.get("/banklist/:country", async (req, res) => {
     });
     const response = await request.data;
     res.send(response);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/shop_charge", auth, async (req, res) => {
+  const { user } = req;
+  const requestData = {
+    tx_ref: Date.now(),
+    amount: "50",
+    currency: "NGN",
+    redirect_url: "http://localhost3000/merchant/home",
+    payment_options: "card",
+    meta: {
+      consumer_id: user.id,
+      consumer_mac: "92a3-912ba-1192a",
+    },
+    customer: {
+      email: user.email,
+      phonenumber: user.phone_number,
+      name: user.fullname,
+    },
+    customizations: {
+      title: "Jumga",
+      description: "Middleout isn't free. Pay the price",
+    },
+  };
+  try {
+    const request = await axios({
+      method: "POST",
+      url: "https://api.flutterwave.com/v3/payments",
+      headers: { Authorization: "Bearer " + process.env.secreteKey },
+      data: requestData,
+    });
+    const { data } = await request.data;
+    console.log(data);
+    res.send(data.link);
   } catch (error) {
     console.log(error);
   }

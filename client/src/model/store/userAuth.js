@@ -7,6 +7,7 @@ const slice = createSlice({
     authorizeUser: (state, { payload }) => {
       localStorage.setItem(payload.auth, payload.token);
       state.user = payload.user;
+      state.auth = payload.auth;
       state.isAuthorized = true;
     },
   },
