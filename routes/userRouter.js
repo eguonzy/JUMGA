@@ -21,18 +21,14 @@ router.post("/user", async (req, res) => {
   }
 });
 
-router.post("/user/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const user = await User.loginVal(req.body.email, req.body.password);
 
     const token = await user.tokenGen();
     let blab = "locolastic";
 
-    if (user.position === "ceo") {
-      return res.status(200).send({ user, token, blab });
-    } else {
-      return res.status(201).send({ user, token, blab });
-    }
+    return res.status(200).send({ user, token, blab });
   } catch (e) {
     console.log(e);
     res.status(400).send(e.toString());
@@ -71,7 +67,7 @@ router.get("/shop_charge", auth, async (req, res) => {
   const requestData = {
     tx_ref: Date.now(),
     amount: "50",
-    currency: "NGN",
+    currency: "USD",
     redirect_url: "http://localhost3000/merchant/home",
     payment_options: "card",
     meta: {

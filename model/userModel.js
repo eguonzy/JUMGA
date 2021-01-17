@@ -103,18 +103,18 @@ UserModel.pre("save", async function (next) {
 });
 
 UserModel.statics.loginVal = async (email, password) => {
-  const User = await User.findOne({ email });
-
-  if (!User) {
+  const user = await User.findOne({ email });
+  console.log(password);
+  if (!user) {
     throw new Error("invalid username or password");
   }
-  const match = await bcrypt.compare(password, User.password);
+  const match = await bcrypt.compare(password, user.password);
 
   if (!match) {
     throw new Error("invalid usernasme or password");
   }
 
-  return User;
+  return user;
 };
 
 UserModel.methods.tokenGen = async function () {

@@ -16,7 +16,7 @@ function MerchantOptCon(props) {
       headers: { Authorization: "Bearer " + localStorage.getItem(auth) },
     });
     const response = await request.data;
-    window.location.replace(response);
+    window.location.href = response;
   };
   return (
     <>
