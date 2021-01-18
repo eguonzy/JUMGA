@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { view } from "../../../model/store/preview";
 import AddImage from "./AddImage";
+import CategoryInput from "./CategoryInput";
 import Input from "./Input";
 import TextField from "./TextField";
 
@@ -49,13 +50,13 @@ function AddForm({ onSubmit, history }) {
     >
       <Input
         type="text"
-        name="Name"
+        name="name"
         label="Name"
         id="name"
         placeholder="Nokia Headphones"
         value={name}
       />
-
+      <CategoryInput />
       <Input name="quantity" value={quantity} label="Quantity" type="number" />
       <Input name="price" value={price} label="Price" type="number" />
       <Input
@@ -69,9 +70,6 @@ function AddForm({ onSubmit, history }) {
       <TextField value={description} label="Description" />
       <AddImage value={imageForm} images={images} />
       <Input type="submit" value="Add Item" />
-      <div onClick={handlePreview} className="preview">
-        <i className="fa fa-eye fa-lg"></i>
-      </div>
     </form>
   );
 }

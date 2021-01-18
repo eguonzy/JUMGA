@@ -1,0 +1,46 @@
+@import "./index.scss";
+.payment-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  .thanks {
+    font-family: Pacifico !important;
+    font-size: 2em;
+    color: lightgreen;
+  }
+  img {
+    width: 80%;
+    text-align: center;
+
+    font-size: 4em;
+  }
+  .payment-status {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    p {
+      margin-bottom: 1em;
+    }
+  }
+  .go-back {
+    padding: 0.5em 1em;
+    background-color: $color;
+    color: white;
+    font-weight: 600;
+    margin-top: 5em;
+    border-radius: 10px;
+    transition: 0.1s linear;
+    width: 90%;
+    text-align: center;
+    &:active {
+      transform: scale(0.99);
+    }
+  }
+}

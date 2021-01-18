@@ -1,28 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import norvasc from "../../../res/images/drug.jpg";
-function ShopCard(props) {
+function ShopCard({ description, quantity, name, price, manufacturer, url }) {
+  console.log(url);
   return (
     <div className="shop-card-con">
       <div className="img-con">
-        <p className="shelved">shelved</p>
-        <img src={norvasc} alt="" />
+        <img src={"/get_image/" + url} alt="" />
       </div>
       <div className="shop-item-details-con">
-        <p className="brand-name">Norvasc</p>
-        <p className="generic-name">Amlodipine 20mg</p>
-        <p className="generic-name">x30 </p>
-        <p className="stock">Qty: 2000</p>
+        <p className="name">{name}</p>
+        <p className="manufacturer">{manufacturer}</p>
+        <p className="stock">Qty: {quantity}</p>
         <p className="stock">Sold: 0</p>
-        <p className="price">&#8358;3000</p>
+        <p className="price">&#8358;{price}</p>
       </div>
       <div className="shop-actions-con">
-        <i className="fa fa-eye"></i>
-
         <div>
           <i className="fa fa-edit"></i>
         </div>
         <div>
-          <p className="total-sales">Total Sales: &#8358;10000</p>
+          <p className="total-sales">Total Sales: &#8358;0</p>
         </div>
       </div>
     </div>

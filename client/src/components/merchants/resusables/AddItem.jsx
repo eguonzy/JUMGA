@@ -12,15 +12,24 @@ function AddItem(props) {
   const state = useSelector((state) => state.entities.preview.images);
 
   const handleSubmit = async (event) => {
-    "use strict";
     event.preventDefault();
     event.persist();
+    console.log(state);
+    console.log(event.target.name.value);
     let form = new FormData(event.target);
     form.append("images", state);
-    let images = [];
     dispatch(down());
-    const request = await fetch("/add_image", { method: "POST", body: form });
-    const res = await request.blob();
+    const request = await fetch("/add_item", {
+      method: "POST",
+      body: form,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("locolastic"),
+      },
+    });
+    const res = await request.json();
+
+    if (request.status === 200) console.log(123);
+    localStorage.setItem("user", JSON.stringify(res));
     //state.length < 3 && alert("Amount of images must be 3");
     setTimeout(() => {
       dispatch(up());

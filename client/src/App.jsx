@@ -9,6 +9,7 @@ import CheckOut from "./components/checkout components/Checkout";
 import UserOptions from "./components/account components/UserOptions";
 import MerchantParent from "./components/merchants/MerchantParent";
 import AlertBox from "./components/reusables/AlertBox";
+import PaymentDone from "./components/payment_confirmation/PaymentDone";
 const store = configureStore();
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <div className="App">
         <AlertBox />
         <Switch>
+          <Route path="/payment_done" component={PaymentDone} />
           <Route path="/account" component={UserOptions} />
           <Route path="/auth" component={HomePage} />
           <Route path="/checkout" component={CheckOut} />

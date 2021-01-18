@@ -26,8 +26,16 @@ const UserModel = new mongoose.Schema(
         quantity: Number,
         price: Number,
         quantity_sold: Number,
-
+        secondary_category: String,
+        primary_category: String,
         description: String,
+        rating_review: [
+          {
+            customer: mongoose.Types.ObjectId,
+            review: String,
+            rating: Number,
+          },
+        ],
         images: [],
       },
     ],

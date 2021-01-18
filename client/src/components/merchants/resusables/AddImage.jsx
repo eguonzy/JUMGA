@@ -35,8 +35,8 @@ function AddImage({ value, images }) {
           accept=".jpg,.png,.svg"
           size="500"
           type="file"
-          multiple
           name="images"
+          multiple
           ref={inputRef}
         />
       </div>

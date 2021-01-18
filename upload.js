@@ -5,24 +5,22 @@ const fs = require("fs");
 const app = express();
 
 app.use("/images", express.static(path.join(__dirname, "images/")));
+console.log("this");
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    req.customUrl = req.customUrl
-      ? [
-          ...req.customUrl,
-          { url: "/images/" + file.originalname, name: file.originalname },
-        ]
-      : [];
-    fs.mkdir("images/" + file.originalname, { recursive: true }, (err) => {
+  destination: async (req, file, cb) => {
+    const paths = (await "images/") + req.user.buisness_name;
+    const url = paths + "/" + file.originalname;
+    console.log(url);
+    req.customUrl = req.customUrl ? [...req.customUrl, url] : [];
+    await fs.mkdir(paths, { recursive: true }, (err) => {
       if (err) console.log(err);
     });
-    cb(null, "images/" + file.originalname);
+    console.log(req.customUrl, req.user.fullname);
+    cb(null, paths);
   },
   filename: (req, file, cb) => {
-    console.log(file);
     cb(null, file.originalname);
   },
-  
 });
 const upit = multer({ storage });
 module.exports = upit;
