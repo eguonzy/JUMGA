@@ -219,8 +219,14 @@
   grid-auto-columns: 100%;
   margin: 0.5em;
   .img-con {
+    display: flex;
+    justify-content: center;
     img {
-      width: 90%;
+      max-width: 95%;
+      margin: 0 auto;
+      max-height: 7em;
+      border-radius: 10px;
+      //  height: 100%;
     }
   }
   .shop-item-details-con {
@@ -228,9 +234,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: small;
+      font-size: medium;
     }
-    .brand-name {
+    .name {
       font-weight: 600;
       font-size: large;
     }

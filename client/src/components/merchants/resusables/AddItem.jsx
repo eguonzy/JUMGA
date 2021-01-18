@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import OptHeaders from "./OptHeaders";
 import AddForm from "./AddForm";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,7 @@ function AddItem(props) {
     console.log(event.target.name.value);
     let form = new FormData(event.target);
     form.append("images", state);
-    dispatch(down());
+
     const request = await fetch("/add_item", {
       method: "POST",
       body: form,
@@ -28,12 +28,15 @@ function AddItem(props) {
     });
     const res = await request.json();
 
-    if (request.status === 200) console.log(123);
-    localStorage.setItem("user", JSON.stringify(res));
-    //state.length < 3 && alert("Amount of images must be 3");
-    setTimeout(() => {
-      dispatch(up());
-    }, 2000);
+    if (request.status === 200) {
+      dispatch(down());
+      localStorage.setItem("user", JSON.stringify(res));
+      setTimeout(() => {
+        dispatch(up());
+      }, 2000);
+      return;
+    } //state.length < 3 && alert("Amount of images must be 3");
+    alert("failed");
   };
   return (
     <div className="add-item">

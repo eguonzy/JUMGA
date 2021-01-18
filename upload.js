@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
     const paths = (await "images/") + req.user.buisness_name;
     const url = paths + "/" + file.originalname;
     console.log(url);
-    req.customUrl = req.customUrl ? [...req.customUrl, url] : [];
+    req.customUrl = req.customUrl ? [...req.customUrl, url] : [url];
     await fs.mkdir(paths, { recursive: true }, (err) => {
       if (err) console.log(err);
     });

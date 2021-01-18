@@ -1,7 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import norvasc from "../../../res/images/drug.jpg";
-function ShopCard({ description, quantity, name, price, manufacturer, url }) {
+function ShopCard({ quantity, name, price, manufacturer, url }) {
   console.log(url);
   return (
     <div className="shop-card-con">

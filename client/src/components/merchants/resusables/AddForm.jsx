@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { view } from "../../../model/store/preview";
+import { useSelector } from "react-redux";
 import AddImage from "./AddImage";
 import CategoryInput from "./CategoryInput";
 import Input from "./Input";
@@ -8,7 +7,6 @@ import TextField from "./TextField";
 
 function AddForm({ onSubmit, history }) {
   const formRef = useRef(null);
-  const dispatch = useDispatch();
   const {
     name,
     price,
@@ -18,29 +16,6 @@ function AddForm({ onSubmit, history }) {
     description,
     images,
   } = useSelector((state) => state.entities.preview);
-  const handlePreview = async () => {
-    const form = formRef.current;
-    const images = [];
-    for (const file of form.images.files) {
-      delete file.lastModifiedDate;
-      delete file.lastModified;
-      images.push(file);
-    }
-    await dispatch(
-      view({
-        name: form.name.value,
-
-        description: form.description.value,
-        quantity: form.quantity.value,
-        price: form.price.value,
-        manufacturer: form.manufacturer.value,
-        imageForm: form.images.files,
-        images,
-      })
-    );
-    console.log(images);
-    history.push("/merchant/preview");
-  };
   return (
     <form
       encType="multipart/form-data"
