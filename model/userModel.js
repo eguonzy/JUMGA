@@ -7,43 +7,28 @@ const UserModel = new mongoose.Schema(
     lastname: String,
     fullname: String,
     date_of_birth: String,
-    buisness_name: String,
+    business_name: String,
     account_number: Number,
     sex: String,
     password: String,
     bank_code: String,
     email: String,
+    account_bank: String,
+    country: String,
     phone_number: String,
+    subaccount_id: String,
     position: String,
     payment_status: { type: Boolean, default: false },
+    split_type: String,
+    split_value: Number,
     addresses: [],
     address: String,
     tokens: [{ token: String }],
-    shop_items: [
-      {
-        name: String,
-        manufacturer: "String",
-        quantity: Number,
-        price: Number,
-        quantity_sold: Number,
-        secondary_category: String,
-        primary_category: String,
-        description: String,
-        rating_review: [
-          {
-            customer: mongoose.Types.ObjectId,
-            review: String,
-            rating: Number,
-          },
-        ],
-        images: [],
-      },
-    ],
     orders_customer: [
       {
         item: {
           name: String,
-          manufacturer: "String",
+          manufacturer: String,
           quantity: Number,
           price: Number,
           quantity_sold: Number,
@@ -51,7 +36,6 @@ const UserModel = new mongoose.Schema(
           images: [],
           rating_review: [
             {
-              customer: mongoose.Types.ObjectId,
               review: String,
               rating: Number,
             },
@@ -79,14 +63,16 @@ const UserModel = new mongoose.Schema(
     cart: [
       {
         item: {
+          _id: mongoose.Schema.Types.ObjectId,
           name: String,
           manufacturer: String,
           quantity: Number,
           price: Number,
+          cart_quantity: { type: Number, default: 0 },
           description: String,
           images: [],
         },
-        customer: mongoose.Types.ObjectId,
+
         total: String,
       },
     ],
@@ -97,9 +83,30 @@ const UserModel = new mongoose.Schema(
         rating: Number,
       },
     ],
+    dispatch_rider: {
+      name: { type: String, default: "badmus" },
+
+      id: Number,
+      account_number: { type: String, default: "0690000031" },
+      account_bank: { type: String, default: "044" },
+      full_name: { type: String, default: "Watson" },
+      split_type: { type: String, default: "percentage" },
+      split_value: { type: String, default: 0.05 },
+      subaccount_id: {
+        type: String,
+        default: "RS_7D16F6C04B046BE2EAF1D2A5AA74CA1A",
+      },
+      bank_name: { type: String, default: "ACCESS BANK NIGERIA" },
+    },
   },
   { timestamps: true }
 );
+
+UserModel.virtual("shop_items", {
+  ref: "Items",
+  localField: "_id",
+  foreignField: "merchant",
+});
 
 UserModel.pre("save", async function (next) {
   if (this.isModified("password")) {

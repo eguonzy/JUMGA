@@ -6,7 +6,7 @@ import { hideMenu, showMenu } from "../../model/store/categorymenu";
 import styles from "../../res/css modules/bottom_menu.module.scss";
 const Bottom_Menu = (props) => {
   const state = useSelector((state) => state.entities);
-  const cartCount = state.cart.ids.length;
+  const cartCount = state.cart.length;
   const isActive = state.categoryMenu;
   const Dispatch = useDispatch();
   const cartIds = state.cart.ids;
@@ -51,14 +51,10 @@ const Bottom_Menu = (props) => {
       <div className={styles.menu_items} onClick={handleToCart}>
         {cartCount > 0 ? (
           <p className={styles.cart_count}>
-            <span style={{ color: "black" }}>{numberManager(cartCount)}</span> |{" "}
-            <span> </span>
-            <span style={{ color: "white" }}>
-              &#8358;{numberManager(total)}
-            </span>
+            <span>{numberManager(cartCount)}</span>
           </p>
         ) : (
-          <p></p>
+          <p className={styles.cart_count}>0</p>
         )}
         <i className="fa fa-shopping-cart fa-2x is-active"></i>
       </div>

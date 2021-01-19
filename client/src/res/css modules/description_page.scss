@@ -24,12 +24,15 @@ $linkColor: blue;
     font-family: auto !important;
     padding: 10px;
     .carousel {
-      height: 30vh;
+      height: 15em;
+
       img {
         image-rendering: optimizeQuality;
         background-size: contain;
+        border-radius: 5px;
         height: 100%;
-        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
       }
     }
   }
@@ -69,25 +72,6 @@ $linkColor: blue;
     padding: 5px;
     margin-top: 18px;
     text-align: center;
-
-    .add_to_cart {
-      padding: 0.5em;
-      cursor: pointer;
-      border-radius: 5px;
-      box-shadow: 1px 1px 1px 1px whitesmoke;
-      color: goldenrod;
-      transition: $transition;
-      transition-duration: 0.1s;
-      font-size: larger !important;
-      border: 1px solid goldenrod;
-
-      &:active {
-        background-color: goldenrod;
-        transform: scaleX(0.98);
-        color: white;
-        border: solid 1px white;
-      }
-    }
   }
   .description_child_con {
     &.first {
@@ -424,5 +408,26 @@ $linkColor: blue;
         }
       }
     }
+  }
+}
+.add_to_cart {
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px whitesmoke;
+  color: goldenrod;
+  transition: $transition;
+  transition-duration: 0.1s;
+  font-size: larger !important;
+  border: 1px solid goldenrod;
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
+
+  &:active {
+    background-color: goldenrod;
+    transform: scaleX(0.98);
+    color: white;
+    border: solid 1px white;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Route, Link } from "react-router-dom";
 import styles from "../../res/css modules/bottom_menu.module.scss";
 import BottomMenu from "../reusables/bottom_menu";
@@ -13,15 +13,25 @@ import CartComponent from "./CartComponent";
 import Orders from "../account components/Orders";
 import { gsap } from "gsap";
 import UserOptionsCon from "../reusables/UserOptionsCon";
+import axios from "axios";
+import { loading, loadingFinished } from "../../model/store/loader";
+import { getItemsList } from "../../model/store/category";
 const Mart_Landing = (props) => {
   const Dispatch = useDispatch();
   const state = useSelector((state) => state);
   const isLoading = state.entities.loader;
   const { isAuthorized } = state.auth.userAuth;
-  //Gsap.registerPlugin(ScrollTrigger);
-  //controls the click response of category first items like "all"
-  //arrg is used to determine if the click is to take user to the list screen if true or to open a category menu
 
+  const getItems = async () => {
+    const request = await axios.get("/items");
+    const response = await request.data;
+
+    return response;
+  };
+
+  useEffect(() => {
+    Dispatch({ type: "apiCallBegan" });
+  }, [Dispatch]);
   let prevScrollpos = window.pageYOffset;
   const handleCloseUserOptions = (e) => {
     gsap.to("." + styles.profile, {
@@ -918,13 +928,9 @@ const Mart_Landing = (props) => {
         />
         <Route path="/Orders" exact component={() => <Orders {...props} />} />
 
+        <Route path="/" exact component={() => <Home {...props} />} />
         <Route
-          path="/"
-          exact
-          component={() => <Home drug_list={drug_list} />}
-        />
-        <Route
-          path="/items"
+          path="/itemslist"
           exact
           component={() => <ItemsList categoryList={[]} {...props} />}
         />
@@ -941,7 +947,7 @@ const Mart_Landing = (props) => {
         </div>
       </div>
     );
-  }, [isLoading, props, Dispatch, isAuthorized]);
+  }, [isLoading, isAuthorized, props, Dispatch]);
 };
 
 export default Mart_Landing;

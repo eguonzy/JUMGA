@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { STATES } from "../../model/states";
 import "../../res/css modules/checkout.scss";
+import AdddressInput from "./AdddressInput";
 function AddAddress(props) {
   const [stateValue, setStateValue] = useState("");
   const [lgaValue, setLgaValue] = useState("");
@@ -23,17 +24,17 @@ function AddAddress(props) {
     lgaRef.current.disabled = true;
     setstateOptions([]);
   };
-  const handleStateOptions = ({ name, locals }) => {
-    setStateValue(name);
-    setstateOptions([]);
-    setLga(locals);
-  };
-  const handleLgaOptions = (name) => {
-    setLgaValue(name);
-    setstateOptions([]);
-    setLga([]);
-    setLgaOptions([]);
-  };
+  // const handleStateOptions = ({ name, locals }) => {
+  //   setStateValue(name);
+  //   setstateOptions([]);
+  //   setLga(locals);
+  // };
+  // const handleLgaOptions = (name) => {
+  //   setLgaValue(name);
+  //   setstateOptions([]);
+  //   setLga([]);
+  //   setLgaOptions([]);
+  // };
   const handleLga = ({ target }) => {
     setLgaValue(target.value);
     if (target.value) {
@@ -48,68 +49,12 @@ function AddAddress(props) {
     <div className="checkout_con">
       <div className="checkout_card">
         <form>
-          <div className="input_con">
-            <div className="options_con">
-              <input
-                name="state"
-                value={stateValue}
-                autoComplete="off"
-                onChange={handleState}
-                type="text"
-                className="input"
-                required
-              />
-              <div className="suggestions_con">
-                {stateOptions.map(({ state }) => (
-                  <p
-                    onClick={() => handleStateOptions(state)}
-                    key={state.id + state.name}
-                  >
-                    {state.name}
-                  </p>
-                ))}
-              </div>
-            </div>
-            <label htmlFor="state">State</label>
-          </div>
-          <div className="input_con">
-            <div className="options_con">
-              <input
-                name="lgs"
-                ref={lgaRef}
-                value={lgaValue}
-                autoComplete="off"
-                onChange={handleLga}
-                disabled="on"
-                type="text"
-                required
-              />
-              <div className="suggestions_con">
-                {lgaOptions.map(({ name }) => (
-                  <p
-                    tabIndex="0"
-                    onClick={() => handleLgaOptions(name)}
-                    key={name}
-                  >
-                    {name}
-                  </p>
-                ))}
-              </div>
-            </div>
-            <label htmlFor="state">L.G.A</label>
-          </div>
-          <div className="input_con">
-            <input name="state" required type="text" />
-            <label htmlFor="state">Address #1 </label>
-          </div>
-          <div className="input_con">
-            <input name="state" type="text" />
-            <label htmlFor="state">Address #2</label>
-          </div>
-          <div className="input_con">
-            <input name="state" type="text" />
-            <label htmlFor="state">LandMarks</label>
-          </div>
+          <AdddressInput name="state" label="State" mode="text" />
+          <AdddressInput name="town" label="Town" mode="text" />
+          <AdddressInput name="phone_number" label="Phone #" mode="tel" />
+          <AdddressInput name="adress_1" label="Address #1" mode="text" />
+          <AdddressInput name="adress_2" label="Address #2" mode="text" />
+          <AdddressInput name="landmarks" label="Landmarks" mode="text" />
         </form>
         <div className="next">
           <p>Save</p>

@@ -3,7 +3,7 @@ const ItemsModel = mongoose.Schema({
   name: String,
   manufacturer: "String",
   quantity: Number,
-  merchant: mongoose.Types.ObjectId,
+  merchant: { ref: "User", type: mongoose.Schema.Types.ObjectId },
   price: Number,
   quantity_sold: Number,
   secondary_category: String,
@@ -11,7 +11,7 @@ const ItemsModel = mongoose.Schema({
   description: String,
   rating_review: [
     {
-      customer: mongoose.Types.ObjectId,
+      customer: mongoose.Schema.Types.ObjectId,
       review: String,
       rating: Number,
     },

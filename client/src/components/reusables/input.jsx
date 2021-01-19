@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   decreaseQuantity,
@@ -9,14 +9,24 @@ import {
 import "../../res/css modules/description_page.scss";
 
 const Input = (props) => {
-  const [cartQuantity, setCartQuantity] = useState(1);
+  const [cartQuantity, setCartQuantity] = useState(props.cart_quantity);
+  const isAdded = props.cart_quantity > 1;
+  console.log(isAdded);
   const cartDispatch = useDispatch();
   const [onAdd, setOnAdd] = useState(false);
   const { item } = props;
-  //change from add to cart to input
+
+  useEffect(() => {
+    setCartQuantity(props.cart_quantity);
+    setOnAdd(props.isAdded);
+  }, [props.cart_quantity, props.isAdded]);
+
   const handleShowQuantity = () => {
-    cartDispatch(itemAdded({ item }));
-    cartDispatch(increaseQuantity({ id: item.id }));
+    // cartDispatch(itemAdded({ item }));
+    cartDispatch({
+      type: "getCart",
+      payload: { item, cart_quantity: 1, _id: item._id },
+    });
     setCartQuantity(1);
     setOnAdd(true);
   };
@@ -24,7 +34,15 @@ const Input = (props) => {
   const handleSubmit = (form) => {
     form.preventDefault();
     form.target.quantity.blur();
-    cartDispatch(increaseQuantity({ id: item.id, quantity: cartQuantity }));
+    cartDispatch({
+      type: "updateCart",
+      payload: {
+        item,
+        quantity: parseInt(form.target.quantity.value),
+        _id: item._id,
+        case: "+",
+      },
+    });
     alert(`${cartQuantity} of ${item.name} added to cart`);
   };
 
@@ -41,15 +59,36 @@ const Input = (props) => {
     switch (e) {
       case "+":
         setCartQuantity((prevState) => ++prevState);
-        cartDispatch(itemAdded({ item }));
-        cartDispatch(increaseQuantity({ id: item.id }));
+        //  cartDispatch(itemAdded({ item }));
+        cartDispatch({
+          type: "updateCart",
+          payload: {
+            item,
+            _id: item._id,
+            case: "+",
+          },
+        });
         return;
       case "-":
         if (cartQuantity === 0) return;
         setCartQuantity((prevState) => --prevState);
-        cartDispatch(decreaseQuantity({ id: item.id }));
+        cartDispatch({
+          type: "updateCart",
+          payload: {
+            item,
+            _id: item._id,
+            case: "-",
+          },
+        });
         if (cartQuantity === 1) {
-          cartDispatch(itemRemoved({ id: item.id }));
+          cartDispatch({
+            type: "updateCart",
+            payload: {
+              item,
+              _id: item._id,
+              case: "0",
+            },
+          });
           setOnAdd(false);
         }
 
@@ -63,7 +102,7 @@ const Input = (props) => {
   };
 
   return !onAdd ? (
-    <div onClick={handleShowQuantity} className="card_add_to_cart">
+    <div onClick={handleShowQuantity} className="card_add_to_cart add_to_cart">
       <p>Add To Cart</p>
     </div>
   ) : (

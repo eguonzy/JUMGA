@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.scss";
 import ph1 from "../../res/images/drug.jpg";
 import caret from "../../res/images/down-arrow (1).svg";
 import ItemList from "../reusables/featured_list";
+import Input from "../reusables/input";
 const Description = (props) => {
   let [isDesc, setIsDesc] = useState(false);
   let [isDetails, setIsDetails] = useState(true);
@@ -21,19 +22,25 @@ const Description = (props) => {
   const detCaret = useRef(null); //for details caret transition
   const polChild = useRef(null); //for details caret transition
   const polCaret = useRef(null); //for details caret transition
-
+  const item = props.history.location.state;
   useEffect(() => {
-    setDetHeight(detChild.current.offsetHeight);
-  }, []);
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    if (cart !== null) {
+      const myItem = cart.find(
+        (cart_item) => item._id.toString() === cart_item.item._id.toString()
+      );
+      myItem && setCartQuantity(myItem.item.cart_quantity);
+    }
+  }, [cartQuantity, item._id]);
   const handleAddToCart = (form) => {
-    // form.preventDefault();
-    //  form.target.blur();
-    //cartDispatch(increaseQuantity({ id: item.id, quantity: cartQuantity }));
+    form.preventDefault();
+    form.target.blur();
+
     alert(`Coming Soon`);
   };
   const handleReveal = async (e) => {
     await setDesHeight(desChild.current.offsetHeight);
-    await setDetHeight(detChild.current.offsetHeight);
+    //  await setDetHeight(detChild.current.offsetHeight);
     await setPolHeight(polChild.current.offsetHeight);
     console.log(desHeight, detHeight);
     if (e === "description") {
@@ -149,24 +156,17 @@ const Description = (props) => {
     <div className="description_con">
       <div className="carousel_con">
         <Slider {...settings}>
-          <div className="carousel">
-            <img src={ph1} alt="drug" />
-          </div>
-          <div className="carousel">
-            <img src={ph1} alt="drug" />
-          </div>
-          <div className="carousel">
-            <img src={ph1} alt="drug" />
-          </div>
-          <div className="carousel">
-            <img src={ph1} alt="drug" />
-          </div>
+          {item.images.map((image) => (
+            <div key={image + 1} className="carousel">
+              <img src={"/get_image/" + image} alt="item" />
+            </div>
+          ))}
         </Slider>
       </div>
 
       <div className="description_title_parent">
         <div className="description_title_con">
-          <p className="description_title">Galvus Met 50mg</p>
+          <p className="description_title">{item.name}</p>
           <i style={{ color: "red" }} className="fa fa-heart"></i>
         </div>
         <div className="description_ratings_con">
@@ -182,32 +182,15 @@ const Description = (props) => {
         </div>
         <p className="vendor">Stanley and sons kiniko</p>
         <div className="qty_price_con ">
-          <div className="quantity description_">
-            <div className="minus-con" onClick={() => handleCartQuantity("-")}>
-              <i className="fa fa-minus"></i>
-            </div>
-            <input
-              inputMode="numeric"
-              type="number"
-              name="quantity"
-              onChange={handleCartQuantity}
-              id=""
-              className="quantity_input"
-              value={cartQuantity}
-              min="1"
-            />{" "}
-            <div className="plus-con" onClick={() => handleCartQuantity("+")}>
-              <i className="fa fa-plus"></i>
-            </div>
-          </div>
-          <p className="description_item_price">&#8358;50000</p>
+          <Input
+            cart="true"
+            cart_quantity={cartQuantity}
+            isAdded={cartQuantity > 1}
+            item={item}
+          />
         </div>
       </div>
-      <div className="description_cart_con">
-        <div onClick={handleAddToCart} className="add_to_cart">
-          <p>Add To Cart</p>
-        </div>
-      </div>
+
       <div className="description_child_con first">
         <div
           onClick={() => handleReveal("description")}
@@ -232,81 +215,11 @@ const Description = (props) => {
           className="description_text_con"
         >
           <p ref={desChild} className="description_text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-            recusandae est nostrum consequuntur fugiat. Rerum debitis,
-            exercitationem excepturi dolorem amet eveniet temporibus repudiandae
-            perferendis ex. Consequatur libero voluptates beatae atque! Lorem
-            ipsum dolor, sit amet consectetur adipisicing elit. Illum voluptas
-            doloribus ab excepturi aspernatur asperiores. Quam saepe dicta
-            repudiandae! Ab totam aut optio fugit officiis magnam alias ad iste
-            laboriosam?
+            {item.description}
           </p>
         </div>
       </div>
-      <div className="description_child_con">
-        <div
-          onClick={() => handleReveal("details")}
-          className="description_child"
-        >
-          <p>Details</p>
-          <img
-            style={{
-              transform: isDetails ? "rotateZ(-180deg)" : "rotate(0deg)",
-            }}
-            ref={detCaret}
-            src={caret}
-            alt="caret"
-          />
-        </div>
-        <div
-          style={{
-            height: isDetails ? detHeight + "px" : "0px",
-            opacity: isDetails ? 1 : 0,
-          }}
-          className="description_text_con"
-        >
-          <table ref={detChild}>
-            <tr>
-              <td>Brand</td>
-              <td>Galvus Met</td>
-            </tr>
-            <tr>
-              <td>Strength</td>
-              <td>90/500mg</td>
-            </tr>
-            <tr>
-              <td>Generic</td>
-              <td style={{ fontSize: "small" }}>
-                Vildagliptine 40mg + Metformin 500mg
-              </td>
-            </tr>
-            <tr>
-              <td>Formulation</td>
-              <td>Syrup</td>
-            </tr>
-            <tr>
-              <td>Manufacturer</td>
-              <td> Eze</td>
-            </tr>
-            <tr>
-              <td>MFD</td>
-              <td>12/10/09</td>
-            </tr>
-            <tr>
-              <td style={{ color: "red" }}>EXD</td>
-              <td>30/10/10</td>
-            </tr>
-            <tr>
-              <td>Nafdac No#</td>
-              <td>59400</td>
-            </tr>
-            <tr>
-              <td>Pack Size</td>
-              <td>90</td>
-            </tr>
-          </table>
-        </div>
-      </div>
+
       <div className="description_child_con">
         <div
           onClick={() => handleReveal("policy")}

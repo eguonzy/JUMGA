@@ -21,10 +21,7 @@ function Checkout(props) {
         setNextAction("Next");
 
         break;
-      case "payment":
-        setStatus("payment");
-        setNextAction("Next");
-        break;
+
       case "summary":
         setStatus("summary");
         setNextAction("Confirm");
@@ -35,15 +32,8 @@ function Checkout(props) {
     }
   };
   const hanldeNext = () => {
-    switch (props.history.location.pathname.slice(10)) {
-      case "shipment":
-        props.history.push("/checkout/payment");
-        setNextAction("Next");
-        break;
-      default:
-        props.history.push("/checkout/summary");
-        setNextAction("Confirm");
-    }
+    props.history.push("/checkout/summary");
+    setNextAction("Confirm");
   };
   return (
     <div className="checkout_con main">
@@ -52,8 +42,7 @@ function Checkout(props) {
       </div>
       <div className="checkout_status_con">
         <p>Shipment </p>
-        <i className="fas fa-long-arrow-alt-right"></i>
-        <p>Payment</p>
+
         <i className="fas fa-long-arrow-alt-right"></i>
         <p>Summary</p>
       </div>
@@ -65,12 +54,7 @@ function Checkout(props) {
           <Shipment cart={cart} onLoad={handleHeader} {...props} />
         )}
       />
-      <Route
-        path="/checkout/payment"
-        component={() => (
-          <Payment cart={cart} onLoad={handleHeader} {...props} />
-        )}
-      />
+
       <Route
         exact
         path="/checkout/addresses"
@@ -96,12 +80,12 @@ function Checkout(props) {
           <p>Estimated Delivery Time</p>
           <p>7 days</p>
         </div>
-        {{ ...cart }.ids.map((id) => {
-          total += cart.cart[id].quantity * cart.cart[id].price;
+        {cart.map((cart) => {
+          total += parseInt(cart.total);
           return (
-            <div key={id} className="shipment_details">
-              <p>{cart.cart[id].name}</p>
-              <p>x{cart.cart[id].quantity}</p>
+            <div key={cart._id} className="shipment_details">
+              <p>{cart.item.name}</p>
+              <p>x{cart.item.cart_quantity}</p>
             </div>
           );
         })}
@@ -112,11 +96,11 @@ function Checkout(props) {
         </div>
         <div className="shipment_details">
           <p>Shipping Fee</p>
-          <p>&#8358; 988</p>
+          <p>&#8358; {total * 0.05}</p>
         </div>
         <div className="shipment_details">
           <p>Total</p>
-          <p>&#8358; {988 + total}</p>
+          <p>&#8358; {150 + total}</p>
         </div>
       </div>
       <div onClick={hanldeNext} className="next">

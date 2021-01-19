@@ -43,42 +43,6 @@ function Summary({ history, onLoad }) {
             </div>
           </form>
         </div>
-        <div className="checkout_card myaddress">
-          <div className="checkout_card_heading">
-            <p>Payment Method</p>
-            <div onClick={() => history.push("/checkout/payment")}>
-              <i className="fa fa-edit"></i>
-            </div>
-          </div>
-          <form>
-            <div className="address ">
-              {" "}
-              <div className="radio_con">
-                <input type="radio" name="address" />{" "}
-                <span className="radiocheck"></span>
-              </div>
-              <div className="address_details">
-                <p className="address_name"> Credit or Debit card</p>
-                <p>Pay using your credit or debit cards</p>
-                <p>Cards from all banks are supported</p>
-                <p>Safe and secure</p>
-                <div className="card_logo_con">
-                  <img
-                    src={mastercard}
-                    title="mastercard logo"
-                    alt="mastercard logo"
-                  />
-                  <img
-                    alt="Credit Card Logos"
-                    title="Credit Card Logos"
-                    src={visa}
-                    border="0"
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
   );

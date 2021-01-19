@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import Groups from "../reusables/drug_groups";
-const Home = (props) => {
-  const { drug_list } = props;
+const Home = ({ history }) => {
+  const items = useSelector((state) => state.entities.category);
+  console.log(history);
+
   return (
     <>
       <div>
-        <Groups title="Antibiotics" drugs={drug_list[0]} />
+        <Groups title="Clothes" history={history} items={items.clothes} />
       </div>
       <div>
-        <Groups title="Syrups" drugs={drug_list[1]} />
+        <Groups
+          title="Electronics"
+          history={history}
+          items={items.electronics.slice(0, 4)}
+        />
       </div>
       <div>
-        <Groups title="Lagos" drugs={drug_list[2]} />
-      </div>
-      <div>
-        <Groups title="Emzor" drugs={drug_list[3]} />
+        <Groups
+          title="Furnitures"
+          history={history}
+          items={items.furnitures.slice(0, 4)}
+        />
       </div>
     </>
   );

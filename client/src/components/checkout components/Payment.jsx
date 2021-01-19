@@ -57,7 +57,7 @@ function Payment({ history, onLoad }) {
               <span className="radiocheck"></span>
             </div>
             <div className="address_details">
-              <p className="address_name"> Pay On Delivery</p>
+              <p className="address_name"> Bank Transfer</p>
 
               <div className="card_logo_con">
                 <img src={bank} alt="bank logo" title="bank logo" />

@@ -6,17 +6,15 @@ import "../../res/css modules/card.scss";
 import CartInput from "./CartInput";
 
 function CartCard({
-  img,
-  expDate,
-  producer,
-  strength,
-  packsize,
-  brand,
+  url,
+  name,
+  manufacturer,
   price,
-  generic,
   quantity,
   history,
-  id,
+  total,
+  item,
+  _id: id,
 }) {
   const Dispatch = useDispatch();
   const handleDelCart = () => Dispatch(itemRemoved({ id }));
@@ -24,17 +22,14 @@ function CartCard({
     <div>
       <div style={{ width: "95%" }} className="card cart-card">
         <img
-          src={img}
+          src={"/get_image/" + url}
           alt="drug"
           onClick={() => history.push("/description")}
         />
         <div className="card_details_con">
-          <p className="details_title">{brand}</p>
-          <p className="details_generic">{generic}</p>
-          <p>{strength}</p>
-          <p>X{packsize}</p>
-          <p className="details_mfr">{producer}</p>
-          <p className="details_exp_date">{expDate}</p>
+          <p className="details_title">{name}</p>
+
+          <p className="details_mfr">{manufacturer}</p>
           <p>
             <i className="fas fa-star star" />
             <i className="fas fa-star star" />
@@ -51,8 +46,8 @@ function CartCard({
           <div onClick={handleDelCart} className="cart-delete">
             <i className="fa fa-trash heart"></i>
           </div>
-          <p>&#8358;{quantity * price}</p>
-          <CartInput id={id} quantity={quantity} />
+          <p>&#8358;{total}</p>
+          <CartInput item={item.item} id={id} quantity={quantity} />
         </div>
       </div>
     </div>

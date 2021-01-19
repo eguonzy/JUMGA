@@ -20,8 +20,8 @@ function CategoryInput(props) {
           setSecOptions(["Children", "Women", "Men"]);
           setShowSecondary(true);
         }
-        if (value === "Computers") {
-          setSecOptions(["Desktop", "Laptop", "Tablet"]);
+        if (value === "Furnitures") {
+          setSecOptions(["Chairs", "Shelves", "Tables"]);
           setShowSecondary(true);
         }
 
@@ -41,7 +41,7 @@ function CategoryInput(props) {
         value={primary}
         arrg={1}
         onChange={handleState}
-        options={["Select Category", "Clothes", "Computers", "Electronics"]}
+        options={["Select Category", "Clothes", "Electronics", "Furnitures"]}
       />
 
       {showSecondary && (

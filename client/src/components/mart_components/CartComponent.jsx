@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../res/css modules/cart.scss";
 import norvasc from "../../res/images/drug.jpg";
 import "../../res/css modules/description_page.scss";
@@ -7,8 +7,7 @@ import { useSelector } from "react-redux";
 import ItemList from "../reusables/featured_list";
 function CartComponent(props) {
   const { cart } = useSelector((state) => state.entities);
-  const cartIds = cart.ids;
-  const cartObject = cart.cart;
+
   const { history } = props;
   let total = 0;
 
@@ -61,28 +60,25 @@ function CartComponent(props) {
   ];
   return (
     <div className="cart_parent">
-      {cartIds.length <= 0 ? (
+      {cart.length <= 0 ? (
         <div className="empty_cart">Cart Is Empty</div>
       ) : (
         <>
           <div className="cart_card_con">
-            {cartIds.map((id) => {
-              total += cartObject[id].quantity * cartObject[id].price;
+            {cart.map((item) => {
+              total += parseInt(item.total);
               return (
                 <CartCard
-                  key={id}
-                  img={norvasc}
-                  expDate="30/5/2020"
-                  producer={cartObject[id.company]}
-                  packsize={cartObject[id.pack_size]}
-                  brand={cartObject[id].name}
-                  formulation={cartObject[id].formulation}
-                  id={id}
-                  quantity={cartObject[id].quantity}
-                  price={cartObject[id].price}
-                  generic={cartObject[id].generic_name}
-                  strength={cartObject[id].strength}
+                  key={item._id}
+                  url={item.item.images[0]}
+                  manufacturer={item.item.manufacturer}
+                  name={item.item.name}
+                  id={item._id}
+                  quantity={item.item.cart_quantity}
+                  price={item.item.price}
+                  total={item.total}
                   {...props}
+                  item={item}
                 />
               );
             })}
@@ -91,7 +87,7 @@ function CartComponent(props) {
             onClick={() => history.push("/checkout/shipment")}
             className="checkout"
           >
-            <p>CHECKOUT &#8358;{total}</p>
+            <p>CHECKOUT &#8358;{parseInt(total)}</p>
           </div>
         </>
       )}

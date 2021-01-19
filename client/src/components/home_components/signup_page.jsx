@@ -92,13 +92,13 @@ const SignUp = (props) => {
         {position === "merchant" && (
           <>
             {" "}
-            <select onChange={getBanks}>
+            <select name="country" onChange={getBanks}>
               <option value="">Select Country</option>
               <option value="GH">Ghana</option>
               <option value="KE">Kenya</option>
               <option value="NG">Nigeria</option>
             </select>
-            <LoginInput label="Buisness Name" name="buisness_name" />
+            <LoginInput label="Buisness Name" name="business_name" />
             <LoginInput
               label="Bank Name"
               isBank={true}

@@ -27,6 +27,7 @@ $boxShadow: 0px 0px 1px 1px rgba(192, 192, 192, 0.5);
     padding: 0.5em;
     font-size: small;
     transition: all 0.5s linear;
+    text-align: center;
   }
 
   .active {
@@ -84,8 +85,8 @@ $boxShadow: 0px 0px 1px 1px rgba(192, 192, 192, 0.5);
     label {
       transition: all 0.5s ease-in-out;
       margin-bottom: 0.1em;
-      transform: translateY(110%);
-
+      //  transform: translateY(110%);
+      font-size: small;
       width: max-content;
     }
     input {
@@ -262,14 +263,11 @@ input[type="radio"] {
   }
 }
 .status {
-  width: calc(100% / 3);
+  width: calc(100% / 2);
   background-color: #075c5f;
   height: 3px;
   border-radius: 5px;
   &.summary {
     margin-left: auto;
-  }
-  &.payment {
-    margin: 0 auto;
   }
 }

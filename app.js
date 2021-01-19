@@ -8,6 +8,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/userRouter");
+var itemsRouter = require("./routes/itemsRouter");
 
 const bodyParser = require("body-parser");
 var app = express();
@@ -24,7 +25,7 @@ app.use(cookieParser());
 //app.use(upload.array("images"));
 app.use(indexRouter);
 app.use(userRouter);
-console.log(process.env.NODE_ENV, "node");
+app.use(itemsRouter);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", function (req, res) {

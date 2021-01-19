@@ -9,7 +9,7 @@ import {
 } from "../../model/store/cart";
 import "../../res/css modules/description_page.scss";
 
-function CartInput({ id, quantity }) {
+function CartInput({ id, quantity, item }) {
   const [cartQuantity, setCartQuantity] = useState(quantity);
   const cartDispatch = useDispatch();
   const [, setOnAdd] = useState(false);
@@ -28,17 +28,38 @@ function CartInput({ id, quantity }) {
     switch (e) {
       case "+":
         setCartQuantity((prevState) => ++prevState);
-        cartDispatch(increaseQuantity({ id }));
+        cartDispatch({
+          type: "updateCart",
+          payload: {
+            item,
+            _id: item._id,
+            case: "+",
+          },
+        });
         return;
       case "-":
         if (cartQuantity === 0) return;
         if (cartQuantity === 1) {
-          cartDispatch(itemRemoved({ id }));
+          cartDispatch({
+            type: "updateCart",
+            payload: {
+              item,
+              _id: item._id,
+              case: "0",
+            },
+          });
           setOnAdd(false);
           return;
         }
         setCartQuantity((prevState) => --prevState);
-        cartDispatch(decreaseQuantity({ id }));
+        cartDispatch({
+          type: "updateCart",
+          payload: {
+            item,
+            _id: item._id,
+            case: "-",
+          },
+        });
 
         break;
 
@@ -52,8 +73,15 @@ function CartInput({ id, quantity }) {
     form.persist();
     form.preventDefault();
     form.target.blur();
-    cartDispatch(increaseQuantity({ id, quantity: cartQuantity }));
-    alert(`Successful`);
+    cartDispatch({
+      type: "updateCart",
+      payload: {
+        item,
+        _id: item._id,
+        case: "+",
+        quantity: cartQuantity,
+      },
+    });
   };
 
   return (

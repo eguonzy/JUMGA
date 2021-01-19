@@ -4,7 +4,9 @@ import "../../res/css modules/list_page.scss";
 import testImg from "../../res/images/drug.jpg";
 import DrugCard from "./DrugCard";
 const ItemsList = (props) => {
-  const category = useSelector((state) => state.entities.itemCategory);
+  const category = useSelector(
+    (state) => state.entities.category[props.history.location.state.title]
+  );
   const [categoryList, setCategoryList] = useState({});
   const [width, setWidth] = useState("49%");
   const [filtrate, setFiltrate] = useState("");
@@ -17,9 +19,6 @@ const ItemsList = (props) => {
   const [strength] = useState("");
   const [rating, setRating] = useState("");
 
-  useEffect(() => {
-    setCategoryList(category);
-  }, [category, props]);
   // useEffect(() => {
   //   (function ($) {
   //     /**
@@ -76,7 +75,7 @@ const ItemsList = (props) => {
     };
     return (
       <div className="item_list_parent">
-        <div className="item__category__list__con">
+        {/* <div className="item__category__list__con">
           {categoryList.categories
             ? categoryList.categories.map((category, index) => {
                 return (
@@ -86,29 +85,22 @@ const ItemsList = (props) => {
                 );
               })
             : " "}
-        </div>
+        </div> */}
         <div className="item__category__item__list__con">
-          {categoryList.category
-            ? categoryList.category.map((item, index) => {
-                return (
-                  <DrugCard
-                    img={testImg}
-                    expDate="30/5/2020"
-                    producer={item.company}
-                    key={item + index}
-                    packsize={item.pack_size}
-                    brand={item.name}
-                    price={item.price}
-                    generic={item.generic_name}
-                    formulation={item.formulation}
-                    strength={item.strength}
-                    cart={false}
-                    item={item}
-                    {...props}
-                  />
-                );
-              })
-            : " "}
+          {category.map((item) => {
+            return (
+              <DrugCard
+                url={item.images[0]}
+                name={item.name}
+                manufacturer={item.manufacturer}
+                key={item._id}
+                price={item.price}
+                cart={false}
+                item={item}
+                {...props}
+              />
+            );
+          })}
         </div>
         <div
           className="filtrate_con"
