@@ -72,7 +72,7 @@ router.get("/shop_charge", auth, async (req, res) => {
     tx_ref: Date.now(),
     amount: "20",
     currency: "USD",
-    redirect_url: "http://localhost:3000/payment_done",
+    redirect_url: "https://jumgamarzz.herokuapp.com/payment_done",
     payment_options: "card",
     meta: {
       consumer_id: user._id,
