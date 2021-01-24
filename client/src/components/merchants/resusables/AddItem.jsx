@@ -3,6 +3,7 @@ import OptHeaders from "./OptHeaders";
 import AddForm from "./AddForm";
 import { useDispatch, useSelector } from "react-redux";
 import { down, up } from "../../../model/store/alert";
+import { add_item } from "../../../model/store/userAuth";
 //import io from "socket.io-client";
 //const socket = io();
 function AddItem(props) {
@@ -30,7 +31,7 @@ function AddItem(props) {
 
     if (request.status === 200) {
       dispatch(down());
-      localStorage.setItem("user", JSON.stringify(res));
+      dispatch(add_item({ shop_items: res.shop_items }));
       setTimeout(() => {
         dispatch(up());
       }, 2000);

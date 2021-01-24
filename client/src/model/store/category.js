@@ -9,7 +9,7 @@ const slice = createSlice({
   reducers: {
     getItemsList: (state, { payload }) => {
       const furnitures = sortItems(payload.items, "Furnitures");
-      const electronics = sortItems(payload.items, "Computers");
+      const electronics = sortItems(payload.items, "Electronics");
       const clothes = sortItems(payload.items, "Clothes");
       return { furnitures, electronics, clothes };
     },

@@ -9,7 +9,11 @@ const Home = ({ history }) => {
   return (
     <>
       <div>
-        <Groups title="Clothes" history={history} items={items.clothes} />
+        <Groups
+          title="Clothes"
+          history={history}
+          items={items.clothes.slice(0, 4)}
+        />
       </div>
       <div>
         <Groups

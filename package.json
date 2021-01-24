@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "server": "nodemon -e * ./bin/www",
+    "server": "nodemon -e js,json,css,jsx,html ./bin/www",
     "devbuild": "concurrently \"npm run start\"  \"npm run build --prefix client\"",
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",

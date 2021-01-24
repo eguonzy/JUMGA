@@ -1,13 +1,33 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import smile from "../../res/images/smile.svg";
 import sad from "../../res/images/sad.svg";
 import "../../res/css modules/payment.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { update_user } from "../../model/store/userAuth";
+import { loadingFinished } from "../../model/store/loader";
+import { itemAdded } from "../../model/store/cart";
 function PaymentDone(props) {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const state = useSelector((state) => state);
+  const user = state.auth.userAuth.user;
+  const cart = state.entities.cart;
+  const dispatch = useDispatch();
   const [status, setStatus] = React.useState(false);
   const [id, setId] = React.useState("");
-  const updateUser = async (id) => {
+
+  const updateUser = async (id, isOrder = false) => {
+    if (isOrder) {
+      const request = await axios.post(
+        "/order_successful",
+        { id, cart: isOrder },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("locolastic"),
+          },
+        }
+      );
+      return await request.data;
+    }
     const request = await axios({
       method: "GET",
       url: "/payment_successful/" + id,
@@ -18,21 +38,29 @@ function PaymentDone(props) {
     const response = await request.data;
     return response;
   };
-  React.useEffect(() => {
+  useEffect(() => {
     if (user === null) props.history.push("/");
     let href = window.location.href;
     let id = href.slice(href.lastIndexOf("=") + 1);
     setId(id);
-
-    if (window.location.href.indexOf("successful") > 1) {
-      setStatus(true);
-      updateUser(id).then((user) =>
-        localStorage.setItem("user", JSON.stringify(user))
-      );
+    setStatus(true);
+    if (href.indexOf("order") > 1) {
+      updateUser(id, cart).then((user) => {
+        dispatch(update_user(user));
+        dispatch(loadingFinished());
+      });
       return;
     }
+    if (href.indexOf("successful") > 1) {
+      updateUser(id).then((user) => {
+        dispatch(update_user(user));
+        dispatch(loadingFinished());
+      });
+      return;
+    }
+
     setStatus(false);
-  }, [props.history, user]);
+  }, [cart, dispatch, props.history, user]);
   const handleBack = () => {
     if (user.position === "merchant") props.history.push("/merchant/home");
     else props.history.push("/");

@@ -34,6 +34,7 @@ const LoginPage = (props) => {
             user: response.user,
             auth: response.blab,
             token: response.token,
+            shop_items: response.shop_items,
           })
         );
         response.user.position === "merchant" &&

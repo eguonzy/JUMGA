@@ -202,16 +202,16 @@ $color: #075c5f;
     border: 1px solid $color;
     height: 0.5em;
     width: 8em;
-    background-image: linear-gradient(-45deg, black 50%, $color 50%);
-    animation: loading infinite 0.2s linear;
+
+    animation: loading infinite 0.103s linear;
   }
 }
 @keyframes loading {
   from {
-    transform: rotateZ(0deg);
+    transform: rotateZ(0deg) scale(0.9);
   }
   to {
-    transform: rotateZ(360deg);
+    transform: rotateZ(360deg) scale(1);
   }
 }
 .logout {

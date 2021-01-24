@@ -51,6 +51,7 @@ const SignUp = (props) => {
             user: response.user,
             auth: response.blab,
             token: response.token,
+            shop_items: [],
           })
         );
         response.user.position === "merchant" &&

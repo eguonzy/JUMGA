@@ -55,3 +55,10 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+// const User = require("./model/userModel");
+// const main = async () => {
+//   const user = await User.findById("600333d6509ca13ad0089bdd");
+//   await user.populate("shop_items").execPopulate();
+//   console.log(user.shop_items[0]);
+// };
+// main();

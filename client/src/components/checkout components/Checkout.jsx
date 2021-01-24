@@ -1,19 +1,25 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
+import { loading, loadingFinished } from "../../model/store/loader";
 import "../../res/css modules/checkout.scss";
 import AddAddress from "../reusables/AddAddress";
+import Loader from "../mart_components/Loader";
 import Address from "./Address";
 import Payment from "./Payment";
 import Shipment from "./Shippment";
 import Summary from "./Summary";
 function Checkout(props) {
   const state = useSelector((state) => state.entities);
+  const dispatch = useDispatch();
   const cart = state.cart;
   const [nextAction, setNextAction] = useState("Next");
   const [status, setStatus] = useState("");
   let total = 0;
-  useEffect(() => {});
+  useEffect(() => {
+    dispatch(loadingFinished());
+  });
   const handleHeader = (status) => {
     switch (status) {
       case "shipment":
@@ -31,12 +37,26 @@ function Checkout(props) {
         break;
     }
   };
-  const hanldeNext = () => {
+  const hanldeNext = async () => {
+    if (nextAction === "Confirm") {
+      dispatch(loading());
+      const request = await axios.post("/checkout", cart, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("locolastic"),
+        },
+      });
+
+      const response = await request.data;
+      console.log(response);
+      window.location.href = response;
+      // dispatch(loadingFinished());
+    }
     props.history.push("/checkout/summary");
     setNextAction("Confirm");
   };
   return (
     <div className="checkout_con main">
+      <Loader />
       <div className="checkout_heading">
         <p>Jumga</p>
       </div>

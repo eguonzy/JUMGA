@@ -8,7 +8,7 @@ app.use("/images", express.static(path.join(__dirname, "images/")));
 
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
-    const paths = (await "images/") + req.user.buisness_name;
+    const paths = (await "images/") + req.user.business_name;
     const url = paths + "/" + file.originalname;
 
     req.customUrl = req.customUrl ? [...req.customUrl, url] : [url];

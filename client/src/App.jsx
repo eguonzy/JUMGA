@@ -10,12 +10,14 @@ import UserOptions from "./components/account components/UserOptions";
 import MerchantParent from "./components/merchants/MerchantParent";
 import AlertBox from "./components/reusables/AlertBox";
 import PaymentDone from "./components/payment_confirmation/PaymentDone";
+import Loader from "./components/mart_components/Loader";
 const store = configureStore();
 function App() {
   return (
     <Provider store={store}>
       <div className="App">
         <AlertBox />
+        <Loader />
         <Switch>
           <Route path="/payment_done" component={PaymentDone} />
           <Route path="/account" component={UserOptions} />

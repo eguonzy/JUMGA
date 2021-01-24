@@ -23,8 +23,8 @@ function LoginInput({ label, name, inputMode, isBank, data, handleBankCode }) {
         type="text"
         name={name}
         required
-        autoComplete="false"
-        autoCorrect="no"
+        autoComplete="off"
+        autoCorrect="off"
         className="input"
         value={value}
         onChange={isBank ? handleBank : handleInput}

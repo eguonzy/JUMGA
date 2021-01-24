@@ -12,7 +12,7 @@ const UserModel = new mongoose.Schema(
     sex: String,
     password: String,
     bank_code: String,
-    email: String,
+    email: { type: String, unique: true },
     account_bank: String,
     country: String,
     phone_number: String,
@@ -43,6 +43,7 @@ const UserModel = new mongoose.Schema(
         },
         customer: mongoose.Types.ObjectId,
         total: Number,
+        order_number: String,
       },
     ],
     orders: [

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Route, Link } from "react-router-dom";
 import styles from "../../res/css modules/bottom_menu.module.scss";
 import BottomMenu from "../reusables/bottom_menu";
@@ -13,27 +13,17 @@ import CartComponent from "./CartComponent";
 import Orders from "../account components/Orders";
 import { gsap } from "gsap";
 import UserOptionsCon from "../reusables/UserOptionsCon";
-import axios from "axios";
-import { loading, loadingFinished } from "../../model/store/loader";
-import { getItemsList } from "../../model/store/category";
+
 const Mart_Landing = (props) => {
   const Dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const isLoading = state.entities.loader;
-  const { isAuthorized } = state.auth.userAuth;
-
-  const getItems = async () => {
-    const request = await axios.get("/items");
-    const response = await request.data;
-
-    return response;
-  };
+  const { isAuthorized, user } = state.auth.userAuth;
 
   useEffect(() => {
     Dispatch({ type: "apiCallBegan" });
   }, [Dispatch]);
   let prevScrollpos = window.pageYOffset;
-  const handleCloseUserOptions = (e) => {
+  const handleCloseUserOptions = () => {
     gsap.to("." + styles.profile, {
       display: "none",
       x: "100%",
@@ -67,62 +57,6 @@ const Mart_Landing = (props) => {
     prevScrollpos = currentScrollPos;
   };
   return useMemo(() => {
-    const drug_list = [
-      [
-        {
-          name: "Amlodipine",
-          price: 60000,
-          company: "Pfizer",
-          pack_size: 30,
-          formulation: "Tablet",
-        },
-        {
-          name: "Diazepam",
-          price: 30500,
-          company: "koko",
-          pack_size: 30,
-          formulation: "Tablet",
-        },
-        {
-          name: "Paracetamol",
-          price: 34000,
-          company: "M & B",
-          pack_size: 30,
-          formulation: "Tablet",
-        },
-        {
-          name: "Amoxicilin",
-          price: 53000,
-          company: "GSK",
-          pack_size: 30,
-          formulation: "Tablet",
-        },
-      ],
-      [
-        {
-          name: "Prednisolone",
-          price: 6000,
-          company: "GSK",
-          pack_size: 30,
-          formulation: "Tablet",
-        },
-        { name: "Vitamin C", price: 500, company: "menka" },
-        { name: "Augmentin 228", price: 34000, company: "lonka" },
-        { name: "Multivite", price: 53000, company: "loma" },
-      ],
-      [
-        { name: "Lonart DS", price: 60000 },
-        { name: "Betnovate C", price: 30500 },
-        { name: "Levamisole", price: 34000 },
-        { name: "Metronidazole", price: 53000 },
-      ],
-      [
-        { name: "Paracetamol", price: 60000, company: "Emzor" },
-        { name: "Vitamin C", price: 30500, company: "Emzor" },
-        { name: "Zinc", price: 34000, company: "Emzor" },
-        { name: "Metronidazole", price: 53000, company: "Emzor" },
-      ],
-    ];
     const class_list = {
       class: {
         Antiinfectives: [
@@ -850,7 +784,9 @@ const Mart_Landing = (props) => {
     const handleAccount = (key) => {
       switch (key) {
         case 0:
-          props.history.push("/account/account");
+          props.history.push(
+            user.position === "merchant" ? "/merchant/home" : "/account/account"
+          );
           Dispatch(account({ option: "Account" }));
           break;
         case 1:
@@ -888,13 +824,6 @@ const Mart_Landing = (props) => {
 
     return (
       <div className={styles.group_parent}>
-        <div
-          style={{ display: isLoading ? "flex" : "none" }}
-          className={styles.loader}
-          onScroll={(e) => e.preventDefault()}
-        >
-          <div className={styles.loadingIcon}></div>
-        </div>
         <div className={styles.header}>
           <Link to="/">
             <p>Jumga</p>
@@ -947,7 +876,7 @@ const Mart_Landing = (props) => {
         </div>
       </div>
     );
-  }, [isLoading, isAuthorized, props, Dispatch]);
+  }, [isAuthorized, props, Dispatch, user.position]);
 };
 
 export default Mart_Landing;

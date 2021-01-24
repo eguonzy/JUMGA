@@ -5,6 +5,7 @@ import ShopCard from "./resusables/ShopCard";
 
 function Shop(props) {
   const items = useSelector((state) => state.auth.userAuth.user.shop_items);
+
   console.log(items);
   return (
     <div>
