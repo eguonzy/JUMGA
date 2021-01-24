@@ -18,7 +18,7 @@ const Mart_Landing = (props) => {
   const Dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { isAuthorized, user } = state.auth.userAuth;
-
+  //
   useEffect(() => {
     Dispatch({ type: "apiCallBegan" });
   }, [Dispatch]);
