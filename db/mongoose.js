@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-let mongooseUrl = process.env.DB || "mongodb://127.0.0.1:27017/jumga";
+let mongooseUrl = process.env.DB;
 try {
   mongoose.connect(process.env.DBS || mongooseUrl, {
     useUnifiedTopology: true,
