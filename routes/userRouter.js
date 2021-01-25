@@ -198,7 +198,7 @@ router.post("/checkout", auth, async (req, res) => {
       public_key: process.env.PUBLIC_KEY_TEST,
       tx_ref: Date.now(),
       amount: cartTotal + deliveryFee,
-      redirect_url: "http://localhost:3000/payment_done?order=true",
+      redirect_url: "https://jumgamarzz.herokuapp.com/payment_done?order=true",
       currency: "NGN",
       payment_options: "card",
       customer: {
