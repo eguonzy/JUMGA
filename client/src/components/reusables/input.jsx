@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import {
-  decreaseQuantity,
-  increaseQuantity,
-  itemAdded,
-  itemRemoved,
-} from "../../model/store/cart";
+import { useDispatch, useSelector } from "react-redux";
+import { loading, loadingFinished } from "../../model/store/loader";
 import "../../res/css modules/description_page.scss";
 
 const Input = (props) => {
+  const user = useSelector((state) => state.auth.userAuth.user);
   const [cartQuantity, setCartQuantity] = useState(props.cart_quantity);
   const isAdded = props.cart_quantity > 1;
   console.log(isAdded);
@@ -21,14 +17,19 @@ const Input = (props) => {
     setOnAdd(props.isAdded);
   }, [props.cart_quantity, props.isAdded]);
 
-  const handleShowQuantity = () => {
+  const handleShowQuantity = async () => {
     // cartDispatch(itemAdded({ item }));
-    cartDispatch({
+    cartDispatch(loading());
+    if (!user) {
+      props.history.push("/auth/login");
+    }
+    await cartDispatch({
       type: "getCart",
       payload: { item, cart_quantity: 1, _id: item._id },
     });
     setCartQuantity(1);
     setOnAdd(true);
+    cartDispatch(loadingFinished());
   };
   //add quantity to cart from input
   const handleSubmit = (form) => {

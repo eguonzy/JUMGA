@@ -835,6 +835,7 @@ const Mart_Landing = (props) => {
             isAuthorized={isAuthorized}
             styles={styles}
             handleAccount={handleAccount}
+            history={props.history}
           />
           <div
             onClick={handleCloseUserOptions}

@@ -136,7 +136,7 @@ UserModel.statics.loginVal = async (email, password) => {
 UserModel.methods.tokenGen = async function () {
   let User = this;
   token = jwt.sign({ _id: User._id.toString() }, "lockandkey", {
-    expiresIn: "1 day",
+    expiresIn: "1 week",
   });
   User.tokens = User.tokens.concat({ token });
   await User.save();

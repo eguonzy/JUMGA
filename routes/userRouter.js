@@ -257,4 +257,15 @@ router.post("/order_successful", auth, async (req, res) => {
     console.log(e);
   }
 });
+
+router.get("/logout", auth, async (req, res) => {
+  try {
+    req.user.tokens = [];
+    req.user.save();
+    res.status(200).send();
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;

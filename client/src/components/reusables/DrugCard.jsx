@@ -46,6 +46,7 @@ function DrugCard(props) {
           cart_quantity={cartQuantity}
           isAdded={cartQuantity > 1}
           item={item}
+          {...props}
         />
       </div>
     </div>

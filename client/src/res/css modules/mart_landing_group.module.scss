@@ -24,12 +24,21 @@ $color: #075c5f;
   flex-wrap: wrap;
 }
 .group_card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 45%;
-  height: 12em;
+  height: 17em;
   margin: 0.2em;
   padding: 0.5em 0.5em;
   border: solid 1px #bbbaba;
   border-radius: 5px;
+  p {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 .more {
   width: 100%;
@@ -46,8 +55,17 @@ $color: #075c5f;
   padding: 0 2em;
 }
 .ph {
-  height: 80%;
-  width: 90%;
+  max-height: 100%;
+  max-width: 90%;
+  margin: 0 auto !important;
+  background: #ffffff;
+  border-radius: 5px;
+}
+.phcon {
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .group_title {
   font-size: large;
@@ -57,7 +75,8 @@ $color: #075c5f;
   display: flex;
   justify-content: space-between;
   color: inherit;
-  font-size: small;
+  font-size: medium;
+  font-weight: bold;
 }
 .company_tag {
   font-size: small;
@@ -67,4 +86,10 @@ $color: #075c5f;
 .fa_caret_right::after {
   margin-left: 0.3em;
   color: $color !important;
+}
+.price {
+  color: green;
+  font-size: large;
+  text-align: right;
+  align-self: flex-end;
 }

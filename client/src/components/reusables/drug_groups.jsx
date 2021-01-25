@@ -23,15 +23,20 @@ const Groups = ({ items = [], title, history }) => {
         </span>
       </p>
       <div className={styles.group_con}>
-        {items.map(({ name, manufacturer, price, images, _id }) => (
-          <HomeCard
-            key={_id}
-            name={name}
-            manufacturer={manufacturer}
-            price={price}
-            url={images[0]}
-          />
-        ))}
+        {items.map((item) => {
+          const { name, manufacturer, price, images, _id } = item;
+          return (
+            <HomeCard
+              key={_id}
+              name={name}
+              manufacturer={manufacturer}
+              price={price}
+              url={images[0]}
+              item={item}
+              history={history}
+            />
+          );
+        })}
       </div>
     </div>
   );

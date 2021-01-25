@@ -109,7 +109,7 @@ const CategoryMenu = (props) => {
   return (
     <div
       ref={con}
-      style={{ top: isActive && "0%" }}
+      style={{ top: isActive && "0%", display: "none" }}
       className={styles_c.category_menu}
     >
       <div className="category_parent">

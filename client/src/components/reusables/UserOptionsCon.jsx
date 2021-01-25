@@ -1,7 +1,17 @@
+import axios from "axios";
 import React from "react";
 import UserOptions from "./UserOptions";
 
-function UserOptionsCon({ handleAccount, styles, isAuthorized }) {
+function UserOptionsCon({ handleAccount, styles, isAuthorized, history }) {
+  const handleLogout = async () => {
+    await axios.get("/logout", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("locolastic"),
+      },
+    });
+    history.push("/");
+    localStorage.clear();
+  };
   return (
     <div className={styles.profile}>
       {isAuthorized ? (
@@ -25,7 +35,7 @@ function UserOptionsCon({ handleAccount, styles, isAuthorized }) {
             handleAccount={handleAccount}
             icon="heart heart"
           />{" "}
-          <p className={styles.logout}>
+          <p onClick={handleLogout} className={styles.logout}>
             <span>LOGOUT</span> <i className="fa fa-sign-out-alt"></i>
           </p>
         </>
