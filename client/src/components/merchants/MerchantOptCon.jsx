@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 function MerchantOptCon(props) {
   const { user: merchant, auth } = useSelector((state) => state.auth.userAuth);
-  console.log(merchant);
+
   const handlePayment = async () => {
     const request = await axios({
       url: "/shop_charge",

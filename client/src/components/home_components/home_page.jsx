@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import blue from "../../res/images/Rectangle1.svg";
 import logo from "../../res/images/logo1.svg";
 import { Route, Link } from "react-router-dom";
@@ -6,11 +6,17 @@ import SignupPage from "./signup_page";
 import LoginPage from "./loginpage";
 import blue_background from "../../res/images/Rectangle2.svg";
 import "../../res/css modules/login.scss";
+import { useDispatch } from "react-redux";
+import { loadingFinished } from "../../model/store/loader";
 const HomePage = (props) => {
   const [isMember, setIsMember] = useState(true);
+  const dispatch = useDispatch();
   const handleRender = (arrg) => {
     return arrg === "login" ? setIsMember(true) : setIsMember(false);
   };
+  useEffect(() => {
+    dispatch(loadingFinished());
+  });
   return (
     <div className="parent">
       <img

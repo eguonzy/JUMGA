@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { itemRemoved } from "../../model/store/cart";
+import { loading } from "../../model/store/loader";
 
 import "../../res/css modules/card.scss";
 import CartInput from "./CartInput";
@@ -17,7 +18,17 @@ function CartCard({
   _id: id,
 }) {
   const Dispatch = useDispatch();
-  const handleDelCart = () => Dispatch(itemRemoved({ id }));
+  const handleDelCart = () => {
+    Dispatch(loading());
+    Dispatch({
+      type: "updateCart",
+      payload: {
+        item: item.item,
+        _id: item.item._id,
+        case: "0",
+      },
+    });
+  };
   return (
     <div>
       <div style={{ width: "95%" }} className="card cart-card">

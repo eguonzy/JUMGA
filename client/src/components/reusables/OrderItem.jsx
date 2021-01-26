@@ -1,14 +1,14 @@
 import React from "react";
 import "../../res/css modules/orderItem.scss";
 import norvasc from "../../res/images/drug.jpg";
-function OrderItem({ brand, generic, strength, quantity, price, status }) {
+function OrderItem({ brand, generic, img, strength, quantity, price, status }) {
   return (
     <div className="orderItemCard">
       <div className="card-img">
-        <img src={norvasc} alt="norvasc" />
+        <img src={"/get_image/" + img} alt="oops" />
       </div>
       <div className="card-info">
-        <p>{brand}</p>
+        <p className="name">{brand}</p>
         <p>
           {generic} {strength}
         </p>
@@ -32,7 +32,6 @@ function OrderItem({ brand, generic, strength, quantity, price, status }) {
             {status.status}
           </span>
         </p>
-        <p>30th April 1994</p>
       </div>
     </div>
   );

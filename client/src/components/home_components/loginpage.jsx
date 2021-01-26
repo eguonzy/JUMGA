@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../res/css modules/login.scss";
 import login_img from "../../res/images/login.svg";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authorizeUser } from "../../model/store/userAuth";
+import { loading, loadingFinished } from "../../model/store/loader";
 const LoginPage = (props) => {
-  const handlePlaceHolder = () => {};
+  const handlePlaceHolder = () => {
+    setIsError(false);
+  };
   const dispatch = useDispatch();
+  const [isError, setIsError] = useState(false);
   const [isMember, setIsMember] = React.useState(true);
   const { onLoad } = props;
   React.useEffect(() => {
@@ -19,6 +23,7 @@ const LoginPage = (props) => {
   }, [onLoad]);
 
   const handleSubmit = async (event) => {
+    dispatch(loading());
     event.preventDefault();
     const form = new FormData(event.target);
     try {
@@ -43,6 +48,8 @@ const LoginPage = (props) => {
       }
     } catch (error) {
       console.log(error);
+      dispatch(loadingFinished());
+      setIsError(true);
     }
   };
 
@@ -52,6 +59,9 @@ const LoginPage = (props) => {
         "form_con " + (isMember ? "slide__in__left" : "slide__out__left")
       }
     >
+      <p style={{ left: isError ? "0" : "100%" }} className="error">
+        Invalid Email/Password
+      </p>
       <form onSubmit={handleSubmit} action="/mart" className="form">
         <div className="input_container">
           <input
@@ -64,7 +74,13 @@ const LoginPage = (props) => {
           <label className="label">Email/Phone Number</label>
         </div>
         <div className="input_container">
-          <input className="input" name="password" type="password" required />
+          <input
+            onFocus={handlePlaceHolder}
+            className="input"
+            name="password"
+            type="password"
+            required
+          />
           <label className="label">Password</label>
         </div>
         <div className="btn_con">

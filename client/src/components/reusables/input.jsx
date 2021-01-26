@@ -22,6 +22,7 @@ const Input = (props) => {
     cartDispatch(loading());
     if (!user) {
       props.history.push("/auth/login");
+      return;
     }
     await cartDispatch({
       type: "getCart",
@@ -48,13 +49,16 @@ const Input = (props) => {
   };
 
   const handleCartQuantity = async (e) => {
+    cartDispatch(loading());
     if (e.target) {
       if (e.target.value === "") {
         setCartQuantity(0);
+        cartDispatch(loadingFinished());
         return;
       }
       if (e.target.value[0] === "0") {
         e.target.value = e.target.value[1];
+        cartDispatch(loadingFinished());
       }
     }
     switch (e) {
@@ -71,7 +75,10 @@ const Input = (props) => {
         });
         return;
       case "-":
-        if (cartQuantity === 0) return;
+        if (cartQuantity === 0) {
+          cartDispatch(loadingFinished());
+          return;
+        }
         setCartQuantity((prevState) => --prevState);
         cartDispatch({
           type: "updateCart",
@@ -81,6 +88,7 @@ const Input = (props) => {
             case: "-",
           },
         });
+
         if (cartQuantity === 1) {
           cartDispatch({
             type: "updateCart",
@@ -97,7 +105,7 @@ const Input = (props) => {
 
       default:
         setCartQuantity(parseInt(e.target.value));
-
+        cartDispatch(loadingFinished());
         break;
     }
   };

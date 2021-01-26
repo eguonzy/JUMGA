@@ -7,6 +7,7 @@ import {
   increaseQuantity,
   decreaseQuantity,
 } from "../../model/store/cart";
+import { loading, loadingFinished } from "../../model/store/loader";
 import "../../res/css modules/description_page.scss";
 
 function CartInput({ id, quantity, item }) {
@@ -15,13 +16,16 @@ function CartInput({ id, quantity, item }) {
   const [, setOnAdd] = useState(false);
 
   const handleCartQuantity = async (e) => {
+    cartDispatch(loading());
     if (e.target) {
       if (e.target.value === "") {
         setCartQuantity(0);
+        cartDispatch(loadingFinished());
         return;
       }
       if (e.target.value[0] === "0") {
         e.target.value = e.target.value[1];
+        cartDispatch(loadingFinished());
       }
     }
 
@@ -38,7 +42,10 @@ function CartInput({ id, quantity, item }) {
         });
         return;
       case "-":
-        if (cartQuantity === 0) return;
+        if (cartQuantity === 0) {
+          cartDispatch(loadingFinished());
+          return;
+        }
         if (cartQuantity === 1) {
           cartDispatch({
             type: "updateCart",
@@ -64,6 +71,7 @@ function CartInput({ id, quantity, item }) {
         break;
 
       default:
+        cartDispatch(loadingFinished());
         setCartQuantity(parseInt(e.target.value));
 
         break;

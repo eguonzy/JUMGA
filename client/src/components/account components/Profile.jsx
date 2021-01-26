@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { account } from "../../model/store/account";
 
 function Profile(props) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.userAuth.user);
   useEffect(() => dispatch(account({ option: "Profile" })));
 
   return (
@@ -16,27 +17,27 @@ function Profile(props) {
         <div className="profile_details_con">
           <p>
             <span className="key">First Name</span>
-            <span className="value">Maroh</span>
+            <span className="value">{user.firstname}</span>
           </p>
           <p>
             <span className="key">Last Name</span>
-            <span className="value">Paul</span>
+            <span className="value">{user.lastname}</span>
           </p>
           <p>
             <span className="key">Sex</span>
-            <span className="value">Male</span>
+            <span className="value">{user.sex}</span>
           </p>
           <p>
             <span className="key">Email Address</span>
-            <span className="value">eguonzy@gmail.com</span>
+            <span className="value">{user.email}</span>
           </p>
           <p>
             <span className="key">Phone No</span>
-            <span className="value">07031111421</span>
+            <span className="value">{user.phone_number}</span>
           </p>
           <p>
             <span className="key">Company Name</span>
-            <span className="value">D'Sanitas Pharmacy & Supermarket</span>
+            <span className="value">{user.business_name}</span>
           </p>
         </div>
       </div>

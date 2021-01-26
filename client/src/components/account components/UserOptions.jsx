@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Link } from "react-router-dom";
 import "../../res/css modules/account.scss";
 import Orders from "./Orders";
@@ -8,9 +8,12 @@ import Settings from "./Settings";
 import Account from "./Account";
 import Notifications from "./Notifications";
 import Profile from "./Profile";
+import { loadingFinished } from "../../model/store/loader";
 function UserOptions(props) {
+  const dispatch = useDispatch();
   const state = useSelector((state) => state.entities.account);
   console.log(state);
+  useEffect(() => dispatch(loadingFinished()));
   return (
     <div className="account_parent">
       <div className="account_logo">

@@ -60,7 +60,7 @@ function PaymentDone(props) {
     }
 
     setStatus(false);
-  }, [cart, dispatch, props.history, user]);
+  }, []);
   const handleBack = () => {
     if (user.position === "merchant") props.history.push("/merchant/home");
     else props.history.push("/");

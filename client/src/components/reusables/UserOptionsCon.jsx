@@ -11,6 +11,7 @@ function UserOptionsCon({ handleAccount, styles, isAuthorized, history }) {
     });
     history.push("/");
     localStorage.clear();
+    window.location.reload();
   };
   return (
     <div className={styles.profile}>

@@ -7,21 +7,26 @@ $shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.034),
   border-radius: 10px;
   background-color: #ffffff;
   margin-bottom: 1em;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   font-family: Roboto !important;
 }
 .card-info {
   width: 50%;
+  display: flex;
+  height: 10em;
+  flex-wrap: wrap;
   p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: small;
+    width: 100%;
     margin-bottom: 0.2em;
-    &:first-of-type {
-      font-size: medium;
-    }
+  }
+  .name {
+    font-weight: bold;
+    font-size: large !important;
   }
   .order-status {
     background-color: green;
@@ -29,6 +34,7 @@ $shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.034),
     padding: 0.2em;
     color: white;
     font-size: smaller;
+    margin-top: auto;
   }
   .price {
     text-align: right;
@@ -39,7 +45,9 @@ $shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.034),
 .card-img {
   margin-right: 1em;
   width: 50%;
+  height: 10em;
   img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
 }

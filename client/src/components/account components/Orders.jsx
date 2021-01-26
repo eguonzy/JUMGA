@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { account } from "../../model/store/account";
 import "../../res/css modules/account.scss";
 import OrderItem from "../reusables/OrderItem";
 function Orders() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.userAuth.user);
   useEffect(() => dispatch(account({ option: "Orders" })));
   const handleOrderCategory = (e) => {
     let list = document.getElementsByClassName("order");
@@ -28,38 +29,16 @@ function Orders() {
         </p>
       </div>
       <div className="order_card_con">
-        <OrderItem
-          brand="Norvasc"
-          strength="40mg"
-          generic="Amlodipine"
-          quantity="34"
-          price="50000"
-          status={{ code: 1, status: "Shipped" }}
-        />
-        <OrderItem
-          brand="Norvasc"
-          strength="40mg"
-          generic="Amlodipine"
-          quantity="34"
-          price="50000"
-          status={{ code: 0, status: "Confirmed" }}
-        />
-        <OrderItem
-          brand="Norvasc"
-          strength="40mg"
-          generic="Amlodipine"
-          quantity="34"
-          price="50000"
-          status={{ code: -1, status: "Not Confirmed" }}
-        />
-        <OrderItem
-          brand="Doxycap"
-          strength="100mg"
-          generic="Doxycycline"
-          quantity="34"
-          price="120000"
-          status={{ code: 1, status: "Shipped" }}
-        />
+        {user.orders_customer.map(({ item }) => (
+          <OrderItem
+            brand={item.name}
+            generic={item.manufacturer}
+            quantity={item.quantity}
+            price={item.price}
+            img={item.images[0]}
+            status={{ code: 1, status: "Shipped" }}
+          />
+        ))}
       </div>
     </div>
   );

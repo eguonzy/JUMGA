@@ -9,8 +9,6 @@ const cartApi = (store) => (next) => async (action) => {
   const { payload } = action;
   if (action.type === "getCart") {
     try {
-      // store.dispatch(loading());
-
       const request = await axios({
         url: "/add_to_cart",
         method: "POST",
@@ -21,7 +19,7 @@ const cartApi = (store) => (next) => async (action) => {
       });
       const response = await request.data;
       store.dispatch(itemAdded(response));
-      //store.dispatch(loadingFinished());
+      store.dispatch(loadingFinished());
     } catch (e) {
       store.dispatch(loadingFinished());
       alert("failed");
@@ -41,16 +39,7 @@ const cartApi = (store) => (next) => async (action) => {
     const response = await request.data;
 
     store.dispatch(increaseQuantity({ response }));
-    // console.log(payload);
-    // const items = state.filter(
-    //   ({ item }) => item._id.toString() === payload._id.toString()
-    // );
-    // payload.quantity
-    //   ? (payload.item.cart_quantity = payload.quantity)
-    //   : ++payload.item.cart_quantity;
-    // items.push(payload.item);
-    // localStorage.setItem("cart", JSON.stringify(items));
-    // state = [...items];
+    store.dispatch(loadingFinished());
   }
 
   if (action.type !== "getCart") return next(action);

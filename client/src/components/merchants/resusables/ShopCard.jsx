@@ -1,6 +1,5 @@
 import React from "react";
 function ShopCard({ quantity, name, price, manufacturer, url }) {
-  console.log(url);
   return (
     <div className="shop-card-con">
       <div className="img-con">

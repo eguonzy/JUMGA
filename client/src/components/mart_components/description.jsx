@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "../../res/css modules/description_page.scss";
 import "slick-carousel/slick/slick-theme.scss";
 import "slick-carousel/slick/slick.scss";
-import ph1 from "../../res/images/drug.jpg";
+import ph1 from "../../res/images/smile.svg";
 import caret from "../../res/images/down-arrow (1).svg";
 import ItemList from "../reusables/featured_list";
 import Input from "../reusables/input";
@@ -106,49 +106,81 @@ const Description = (props) => {
   };
   const cards = [
     {
-      brand: "Lonart DS",
-      producer: "OKO",
-      expiry: "30/04/94",
+      brand: "Lorem",
       image: ph1,
       price: 1400,
-      packsize: 6,
-      generic: "tab Artemeter 80mg +  Lumefantrine 480mg",
+
+      generic: "ipsum dolor ipsum lorem",
     },
     {
-      brand: "Norvasc 10mg",
-      producer: "Pfizer",
-      expiry: "30/04/94",
+      brand: "Lorem",
       image: ph1,
-      packsize: 10,
-      price: 5000,
-      generic: "tab Amlodipine 10mg",
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
     },
     {
-      brand: "Natrilix 2.5mg",
-      producer: "Sanofi",
-      expiry: "30/04/94",
-      packsize: 10,
-      price: 14000,
+      brand: "Lorem",
       image: ph1,
-      generic: "tab Indapamide 2.5mg",
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
     },
     {
-      brand: "Panadol Extra",
-      producer: "May & Baker",
-      expiry: "30/04/94",
-      packsize: 10,
-      price: 10000,
+      brand: "Lorem",
       image: ph1,
-      generic: "Paracetamol 500mg + caffeine",
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
     },
     {
-      brand: "Cocodamol",
-      producer: "Emzor",
-      expiry: "30/04/94",
-      packsize: 10,
-      price: 800,
+      brand: "Lorem",
       image: ph1,
-      generic: "tab Paracetamol 500mg + Codeine 8mg",
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
+    },
+    {
+      brand: "Lorem",
+      image: ph1,
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
+    },
+    {
+      brand: "Lorem",
+      image: ph1,
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
+    },
+    {
+      brand: "Lorem",
+      image: ph1,
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
+    },
+    {
+      brand: "Lorem",
+      image: ph1,
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
+    },
+    {
+      brand: "Lorem",
+      image: ph1,
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
+    },
+    {
+      brand: "Lorem",
+      image: ph1,
+      price: 1400,
+
+      generic: "ipsum dolor ipsum lorem",
     },
   ];
 
@@ -187,6 +219,7 @@ const Description = (props) => {
             cart_quantity={cartQuantity}
             isAdded={cartQuantity > 1}
             item={item}
+            {...props}
           />
         </div>
       </div>

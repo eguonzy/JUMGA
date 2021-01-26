@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../res/css modules/cart.scss";
-import norvasc from "../../res/images/drug.jpg";
+import norvasc from "../../res/images/smile.svg";
 import "../../res/css modules/description_page.scss";
 import CartCard from "../reusables/CartCard";
 import { useSelector } from "react-redux";
@@ -13,49 +13,44 @@ function CartComponent(props) {
 
   const cards = [
     {
-      brand: "Lonart DS",
-      producer: "OKO",
-      expiry: "30/04/94",
+      brand: "Lorem",
+
       image: norvasc,
       price: 1400,
-      packsize: 6,
-      generic: "tab Artemeter 80mg +  Lumefantrine 480mg",
+
+      generic: "ipsum dolor lorem impsum",
     },
     {
-      brand: "Norvasc 10mg",
-      producer: "Pfizer",
-      expiry: "30/04/94",
+      brand: "Lorem",
+
       image: norvasc,
-      packsize: 10,
-      price: 5000,
-      generic: "tab Amlodipine 10mg",
+      price: 1400,
+
+      generic: "ipsum dolor lorem impsum",
     },
     {
-      brand: "Natrilix 2.5mg",
-      producer: "Sanofi",
-      expiry: "30/04/94",
-      packsize: 10,
-      price: 14000,
+      brand: "Lorem",
+
       image: norvasc,
-      generic: "tab Indapamide 2.5mg",
+      price: 1400,
+
+      generic: "ipsum dolor lorem impsum",
     },
     {
-      brand: "Panadol Extra",
-      producer: "May & Baker",
-      expiry: "30/04/94",
-      packsize: 10,
-      price: 10000,
+      brand: "Lorem",
+
       image: norvasc,
-      generic: "Paracetamol 500mg + caffeine",
+      price: 1400,
+
+      generic: "ipsum dolor lorem impsum",
     },
     {
-      brand: "Cocodamol",
-      producer: "Emzor",
-      expiry: "30/04/94",
-      packsize: 10,
-      price: 800,
+      brand: "Lorem",
+
       image: norvasc,
-      generic: "tab Paracetamol 500mg + Codeine 8mg",
+      price: 1400,
+
+      generic: "ipsum dolor lorem impsum",
     },
   ];
   return (

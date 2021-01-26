@@ -42,7 +42,10 @@ router.post("/update_cart/:case", auth, async (req, res) => {
     const items = user.cart.filter(
       ({ item }) => item._id.toString() !== _id.toString()
     );
-    console.log(cartItem);
+    const index = user.cart
+      .map(({ item }) => item._id.toString())
+      .indexOf(_id.toString());
+    console.log(req.body);
     const action = req.params.case;
     switch (action) {
       case "+":
@@ -50,24 +53,26 @@ router.post("/update_cart/:case", auth, async (req, res) => {
         quantity
           ? (cartItem.item.cart_quantity = quantity)
           : ++cartItem.item.cart_quantity;
-        cartItem.total = cartItem.item.quantity * cartItem.item.cart_quantity;
-        items.push(cartItem);
-        user.cart = items;
+        cartItem.total = cartItem.item.price * cartItem.item.cart_quantity;
+
+        user.cart[index] = cartItem;
+        console.log(cartItem.total);
         user.save();
         res.send(user.cart);
         break;
       case "-":
         --cartItem.item.cart_quantity;
-        cartItem.total = cartItem.item.quantity * cartItem.item.cart_quantity;
+        cartItem.total = cartItem.item.price * cartItem.item.cart_quantity;
 
-        items.push(cartItem);
-        user.cart = items;
+        user.cart[index] = cartItem;
+        console.log(cartItem.total);
         user.save();
         res.send(user.cart);
         break;
 
       default:
         user.cart = items;
+        console.log(cartItem.total);
         res.send(user.cart);
         user.save();
         break;
