@@ -157,6 +157,7 @@ router.post("/checkout", auth, async (req, res) => {
     item.merchant = cartItem.merchant._id; //asign merchant key the merchant_id value
     dispatch_rider = {
       //get dispatch rider of merchant
+
       id: cartItem.merchant.dispatch_rider.subaccount_id,
       transaction_charge: 0,
       transaction_charge_type: "flat_subaccount",
@@ -186,10 +187,9 @@ router.post("/checkout", auth, async (req, res) => {
   }
 
   let deliveryFee = cartTotal * 0.05;
-  dispatch_rider.transaction_charge = (
-    deliveryFee -
-    deliveryFee * 0.25
-  ).toFixed(2);
+  dispatch_rider.transaction_charge = (deliveryFee - deliveryFee * 0.2).toFixed(
+    2
+  );
   merchants.push(dispatch_rider);
   console.log(merchants);
 

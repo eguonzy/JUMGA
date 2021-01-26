@@ -870,14 +870,14 @@ const Mart_Landing = (props) => {
           component={() => <CartComponent {...props} />}
         />
 
-        <CategoryMenu class_list={class_list} {...props} />
+        <CategoryMenu items={state.entities.category} {...props} />
 
         <div className={styles.bottom_menu_con}>
           <BottomMenu {...props} />
         </div>
       </div>
     );
-  }, [isAuthorized, props, Dispatch, user?.position]);
+  }, [isAuthorized, props, state.entities.category, Dispatch, user.position]);
 };
 
 export default Mart_Landing;

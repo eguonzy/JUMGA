@@ -6,7 +6,7 @@ import "../../res/css modules/category.scss";
 import styles_c from "../../res/css modules/category_menu.module.scss";
 
 const CategoryMenu = (props) => {
-  const { class_list, history } = props;
+  const { items, history } = props;
 
   let tl = gsap.timeline({ paused: true });
   const Dispatch = useDispatch();
@@ -40,7 +40,7 @@ const CategoryMenu = (props) => {
     setIsCategory(true);
 
     //shows the items in a category
-    setList(class_list[category]);
+    setList(items[category]);
   };
   function handleShowMenu() {
     isActive ? Dispatch(hideMenu()) : Dispatch(showMenu());

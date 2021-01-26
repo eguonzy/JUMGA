@@ -24,7 +24,7 @@ function MerchantOptCon(props) {
         {!merchant.payment_status && (
           <div className="not-paid">
             <div className="not-paid-card">
-              <p>Open shop with $50</p>
+              <p>Open shop with $20</p>
               <div onClick={handlePayment} className="paynow">
                 Pay Now
               </div>
